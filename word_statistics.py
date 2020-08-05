@@ -6,6 +6,9 @@ import re
 import json
 from lexical_diversity import lex_div as ld
 import spacy
+# as this program uses spacy, please also load the language library by typing
+# python -m spacy download en_core_web_sm
+# before using this program
 from collections import Counter
 from rake_nltk import Rake
 import argparse
