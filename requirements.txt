@@ -1,0 +1,7 @@
+rake_nltk==1.0.4
+lexical_diversity==0.1.1
+nltk==3.5
+textblob==0.15.3
+textstat==0.6.2
+matplotlib==3.3.0
+spacy==2.3.2

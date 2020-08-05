@@ -1,0 +1,125 @@
+Developing a Chinese version of an
+Author Recognition Test for college
+students in Taiwan
+
+This study set out to develop a Chinese Author Recognition Test (CART) that might be
+used as a measure of objective print exposure for college students in Taiwan. We found
+that there is a linkage between print exposure and general reading achievement for
+college students. We also found that, among self-reported reading habits, comparative
+reading habits and CART, primary print knowledge scores within the CART family have
+the strongest prediction power for both the ‘General Scholastic Ability Test-Chinese’
+and the ‘Department Required Test-Chinese’ beyond the joint contributions of vocabulary size and reading comprehension. By sharing the process of developing the instrument, we shed some light for researchers from regions other than English-speaking
+countries on how they might move forward in future investigations.
+
+
+There is tremendous variation in literacy habits. Researchers in Western cultures have
+linked such variation in college students’ print exposure to their variability in
+reading-related skills, such as lexical-decision latency (Chateau & Jared, 2000), spelling
+ability (Burt & Fury, 2000; Stanovich & West, 1989), vocabulary (Martin-Chang & Gould,
+2008; Stanovich, West & Harrison, 1995; West & Stanovich, 1991), verbal fluency
+(Stanovich & Cunningham, 1992), reading comprehension and reading rate (Martin-Chang
+& Gould, 2008), and general measures of achievement in reading and reading-related
+domains (e.g., the SAT reading and English subtests; Acheson, Wells & Macdonald,
+2008). Because level of print exposure has been one of the key variables in individual
+differences across many reading-related cognitive dimensions, developing a reliable
+Chinese instrument for assessing relative levels of print exposure is the focus of this study.
+Traditional research has used a self-reported measure of reading habits, which asks
+college students or young adults to estimate the amount of time they spend reading.
+Results of questionnaires and interviews have served to assess their variation in literacy
+habits (e.g., Gallik, 1999; Guthrie, 1981; Walberg & Tsai, 1984). An alternative tool, the
+Author Recognition Test (ART) for college students, was first developed by Stanovich
+and West (1989) and has been widely used since its creation. The ART has consistently
+proven to be an ideal proxy measure for out-of-school print exposure. The test includes
+the names of both popular authors and foils, and respondents are to indicate whether or not they are familiar with the name of a particular author by putting a check mark next to
+the name. According to Stanovich, Cunningham and West (1998), the advantages of the
+ART over traditional methods include easy administration, low task demands, time-saving
+and minimisation of the complications associated with social desirability involved in
+self-reporting.
+The first version of the ART for college students was developed as a measure reflecting
+relative individual differences in print exposure and was not intended to measure absolute
+levels of print exposure (Stanovich & West, 1989). It consisted of 50 ‘popular’ authors and
+50 ‘foils’. Most of the popular authors regularly appeared on fiction and non-fiction best-seller
+lists. Major categories of fiction included mystery/detective, romance/Gothic, spy/intrigue,
+occult/supernatural, historical novels, Westerns, short stories and science fiction. Non-fiction
+categories included sports, science, politics/current events, humour, religious, history,
+biography and business/finance. Authors that appeared in the school curriculum were
+avoided, as the ART was intentionally biased toward out-of-school reading experience. Foils,
+that is, names taken from the editorial board of a professional journal that were unfamiliar to
+all respondents in the study, were used to prevent respondents from simply checking all the
+names. Scoring on the task was determined by subtracting the false-alarm rate from the hit
+rate. The original version of the ART was later revised into a 25-item instrument containing
+the names of 16 authors and 9 foils in West and Stanovich’s (1991) study and into an 80-item
+version containing 40 authors and 40 foils in several succeeding studies (e.g., Stanovich &
+Cunningham, 1992; Stanovich et al., 1995). Although the Magazine Recognition Test
+(MRT) and the Newspaper Recognition Test (NRT) have been frequently utilised, the ART
+has remained the most sensitive measure of print exposure, probably because the writing
+styles of individual authors influence readers’ selection of reading materials and avid readers
+usually have their favourite authors. Magazines and newspapers, on the other hand, represent
+collections of works of many authors and therefore are of less distinctive value.
+The ART was also revised or developed in several English-speaking countries other than
+the United States. Chateau and Jared (2000), for example, generated a Canadian version of
+the ART for college students and found that levels of print exposure were highly correlated
+with the efficiency of both orthographical and phonological word recognition. Burt and
+Fury (2000) also revised the 1989 (Stanovich & West, 1989) and 1992 (Stanovich &
+Cunningham, 1992) versions into a test for Australian college students. Authors found that
+level of print exposure served as a better predictor of spelling ability than the joint
+contributions of reading comprehension and vocabulary. Later, Masterson and Hayes
+(2007) developed new versions of the ART and the Title Recognition Test (TRT) for adults
+in the United Kingdom. Note that, in the past, the TRT was used mainly for children rather
+than adults (e.g., Allen, Cipielewski & Stanovich, 1992; Cipielewski & Stanovich, 1992;
+Cunningham & Stanovich, 1990; Ecalle & Magnan, 2008; McBride-Chang & Chang,
+1995). Masterson and Hayes’ initial list of authors and titles was equally distributed among
+four sources: the top 100 most-loaned titles according to a library for 2002 and 2003, the
+Nielscan Top 100 fiction titles purchased before September 2004, the top-ranked list at an
+online bookshop, and the titles or authors that had recently been awarded prizes. These lists
+were then pilot-tested, and the final lists were formed by deleting the items that were least
+often correctly identified. The researchers found higher scores for the UKART than for the
+UKTRT. Both measures served as good predictors for spelling ability, vocabulary and
+reading rate, but only the UKART was related to comprehension.
+Two recent studies might have elaborated our understanding of the ART. First, MartinChang and Gould (2008) proposed the notion of dividing the ART into two dimensions: personal reading experience from primary print knowledge (PPK) and from secondary
+print knowledge (SPK). They updated the original version of the ART (Stanovich &
+West, 1989) by adding 30 contemporary best-selling authors suggested by avid
+readers during pilot investigations, thus resulting in a final checklist consisting of
+75 widely recognised authors and 75 foils. In this version of the ART, in addition
+to indicating whether or not they were familiar with the name of a particular author,
+respondents were also asked to report if (1) they had heard of this author but not read
+any of his or her books, (2) they had started a book by this author but not finished it,
+or (3) they had read one or more of this author’s books. Although scores for the PPK
+were obtained by summing the number of authors that respondents successfully
+recognised and reported that ‘they had read one or more of this author’s books’
+divided by the total number of real authors, scores for the SPK were calculated by
+summing the number of authors that respondents successfully recognised but reported
+that ‘they had heard of this author, but not read any of his or her books’ over the total
+number of real authors. Foils that were incorrectly marked were ignored from both
+measures of print exposure. Authors that respondents successfully recognised and
+reported that ‘they had started a book by this author but not finished it’ were also
+ignored. This study found that the PPK accounted for variance in all three criterion
+variables (vocabulary, comprehension and reading rate) after the effects of the SPK
+had been factored out.
+Second, Acheson et al. (2008) measured print exposure not only with the revised
+ART and MRT but also with several new self-reports on reading and writing habits:
+time spent reading, time spent writing and comparative reading habits (CRH). In the
+section of time spent reading, participants were asked to estimate the amount of time
+they spent in a typical week reading certain types of material, for example, textbooks,
+academic material, magazines, newspapers, emails, Internet material, fiction and
+non-fiction. Similarly, they were asked to estimate the amount of time they spent
+writing certain types of material, for example, for class, articles, personal, emails,
+creative and job-related. In the CRH section, they were asked to compare their own
+reading habits to those of other college students on a Likert scale consisting of five
+dimensions: time spent reading, complexity of reading material, reading enjoyment,
+reading speed and reading comprehension ability. This study employed hierarchical
+regression and found that when the CRH was entered before the ART/MRT composite,
+the unique predictability of the ART/MRT was reduced to nonsignificance. The
+researchers suggested that the CRH might be better equipped to capture a broader
+range of reading experiences, including Internet-based reading. In addition, although
+self-estimated reading time fails to differentiate slow readers from avid readers and
+is therefore relatively unreliable, the CRH appears to be a useful supplement to other
+assessments of print exposure.
+In summary, previous studies from English-speaking countries have used
+various measures of print exposure for college students: self-reported reading
+habits, self-reported CRH and objective print exposure measures such as the ART.
+The relationships between print exposure, and reading-related skills or general reading
+performance have been well-established, especially between the ART and the readingrelated performance. Compared with studies from Western cultures, investigations of
+college students’ print exposure and its relationship with reading-related performance
+in Taiwan have been limited. This paper represents one of the first efforts dedicated to
+this topic.
