@@ -70,8 +70,8 @@ listToStr = ' '.join(map(str, message))
 # split into sentences, using punkt tokenizer
 sentences = sent_tokenize(listToStr)  # Use sentence tokenizer 
 
-# detect language
-ling = TextBlob(str(sentences[1]))
+# detect language based on the first sentence
+ling = TextBlob(str(sentences[0]))
 lang = ling.detect_language()
 # print(lang)
 
@@ -165,6 +165,8 @@ def flesch_reading_consensus(score):
     result_index = int(flesch_grade)
     if result_index < 0:
         result_index = 0
+    elif result_index > 100:
+        result_index = 100
     return result[result_index] 
 
 
@@ -233,7 +235,7 @@ else:
     result_path = "{}".format(os.path.splitext(file_name)[0])
 
 joined_path = os.path.join(basepath, directory)
-os.chdir(joined_path + "\\" + result_path)
+os.chdir(joined_path + "/" + result_path)
 
 if args.general:
     stats = stats['general']
