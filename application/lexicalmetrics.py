@@ -1,8 +1,7 @@
 import collections
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import stopwords
-
-
+import os
 class objdict(dict):
     def __getattr__(self, name):
         if name in self:
@@ -36,14 +35,13 @@ class lexicalmetrics:
 
     def generate_score(self, tokenized_text):
         try:
-            f = open('/misc/written.num', 'r', encoding='utf-8')
-            f1 = open('/misc/awl.txt', "r", encoding='utf-8')
-            f2 = open('/misc/familiarity.txt', 'r', encoding='utf-8')
-            f3 = open('/misc/concreteness.txt', 'r', encoding='utf-8')
-            f4 = open('/misc/imaginability.txt', 'r', encoding='utf-8')
-            f5 = open('/misc/meaningfulness_coloradonorms.txt', 'r', encoding='utf-8')
-            f6 = open("/misc/meaningfulness_paivionorms.txt", 'r', encoding='utf-8')
-            f7 = open('/misc/ageofacquisition.txt', 'r', encoding='utf-8')
+            f = open('application/misc/written.num', 'r', encoding='utf-8')
+            f1 = open('application/misc/familiarity.txt', 'r', encoding='utf-8')
+            f2 = open('application/misc/concreteness.txt', 'r', encoding='utf-8')
+            f3 = open('application/misc/imaginability.txt', 'r', encoding='utf-8')
+            f4 = open('application/misc/meaningfulness_coloradonorms.txt', 'r', encoding='utf-8')
+            f5 = open("application/misc/meaningfulness_paivionorms.txt", 'r', encoding='utf-8')
+            f6 = open('application/misc/ageofacquisition.txt', 'r', encoding='utf-8')
         except IOError:
             print("file cannot be opened")
             exit()
@@ -128,7 +126,6 @@ class lexicalmetrics:
         self.wordfrequencycontent(tokenized_text, contentlist)
         self.wordfrequencyfunction(tokenized_text, functionlist)
         self.wordrange(tokenized_text, occurlist)
-        self.academicwords(nostopwords_tokenized_text, awl, awl_sublist1, awl_sublist2, awl_sublist3, awl_sublist4, awl_sublist5, awl_sublist6, awl_sublist7, awl_sublist8, awl_sublist9, awl_sublist10)
         self.wordfamiliarity(nostopwords_tokenized_text, familiaritylist)
         self.wordconcreteness(nostopwords_tokenized_text, concretenesslist)
         self.wordimagability(nostopwords_tokenized_text, imagabilitylist)

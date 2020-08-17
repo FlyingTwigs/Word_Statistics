@@ -10,6 +10,25 @@ class RangeDict(dict):
         else:
             return super().__getitem__(item)
 
+flesch_grading_system = {
+                        range(0 , 10): 'extremely hard to read',
+                        range(10, 30): 'very hard to read',
+                        range(30, 50): 'hard to read',
+                        range(50, 60): 'fairly hard to read',
+                        range(60, 70): 'easy to read',
+                        range(70, 80): 'fairly easy to read',
+                        range(80, 90): 'easy to read',
+                        range(90, 101): 'very easy to read'
+                        }
+
+def flesch_reading_consensus(score):
+        result = RangeDict(flesch_grading_system)
+        result_index = int(score)
+        if result_index < 0:
+            result_index = 0
+        elif result_index > 100:
+            result_index = 100
+        return result[result_index]
 
 class readability:
     def __init__(self):
@@ -30,23 +49,3 @@ class readability:
         self.ari_grade = ts.automated_readability_index(text)
         self.coleman_liau_grade = ts.coleman_liau_index(text)
         pass
-
-    flesch_grading_system = {
-                        range(0 , 10): 'extremely hard to read',
-                        range(10, 30): 'very hard to read',
-                        range(30, 50): 'hard to read',
-                        range(50, 60): 'fairly hard to read',
-                        range(60, 70): 'easy to read',
-                        range(70, 80): 'fairly easy to read',
-                        range(80, 90): 'easy to read',
-                        range(90, 101): 'very easy to read'
-                        }
-
-    def flesch_reading_consensus(self, score):
-        result = RangeDict(flesch_grading_system)
-        result_index = int(score)
-        if result_index < 0:
-            result_index = 0
-        elif result_index > 100:
-            result_index = 100
-        return result[result_index]

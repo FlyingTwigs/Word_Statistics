@@ -77,8 +77,6 @@ class score:
         metrics['writing'] = writing
         return metrics
 
-        print(metrics['general'])
-
 if __name__ == "__main__":
     score = score()
     a = "Tom hit Jerry. Jerry hit him back. tom was mad. Jerry is happy. Tom and Jerry not firends. This demonstrates that Tom and Jerry are not friends. Our hypothesis was wrong."
