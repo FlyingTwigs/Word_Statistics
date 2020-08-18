@@ -18,6 +18,9 @@ class objdict(dict):
         else:
             raise AttributeError("No such attribute: " + name)
 
+basepath = os.path.dirname(os.path.realpath(__file__))
+miscpath = 'misc'
+joined_path = os.path.join(basepath, miscpath)
 
 class lexicalmetrics:
     def __init__(self):
@@ -35,13 +38,14 @@ class lexicalmetrics:
 
     def generate_score(self, tokenized_text):
         try:
-            f = open('application/misc/written.num', 'r', encoding='utf-8')
-            f1 = open('application/misc/familiarity.txt', 'r', encoding='utf-8')
-            f2 = open('application/misc/concreteness.txt', 'r', encoding='utf-8')
-            f3 = open('application/misc/imaginability.txt', 'r', encoding='utf-8')
-            f4 = open('application/misc/meaningfulness_coloradonorms.txt', 'r', encoding='utf-8')
-            f5 = open("application/misc/meaningfulness_paivionorms.txt", 'r', encoding='utf-8')
-            f6 = open('application/misc/ageofacquisition.txt', 'r', encoding='utf-8')
+            os.chdir(joined_path)
+            f = open('written.num', 'r', encoding='utf-8')
+            f1 = open('familiarity.txt', 'r', encoding='utf-8')
+            f2 = open('concreteness.txt', 'r', encoding='utf-8')
+            f3 = open('imagability.txt', 'r', encoding='utf-8')
+            f4 = open('meaningfulness_coloradonorms.txt', 'r', encoding='utf-8')
+            f5 = open('meaningfulness_paivionorms.txt', 'r', encoding='utf-8')
+            f6 = open('ageofacquisition.txt', 'r', encoding='utf-8')
         except IOError:
             print("file cannot be opened")
             exit()

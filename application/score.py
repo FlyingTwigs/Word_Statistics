@@ -65,11 +65,11 @@ class score:
         lexical['meaningfulnesscscore'] = self.lex.meaningfulnesscscore
         lexical['meaningfulnesspscore'] = self.lex.meaningfulnesspscore
         lexical['ageofacquisitionscore'] = self.lex.ageofacquisitionscore
-        lexical['grammar_errorrate'] = self.scale_grammar(self.grammar.errorrate)
 
         writing['top_8_named_entity'] = self.general.namedentity
         writing['top_10_phrases'] = self.general.topphrases
         writing['phrases_wordcloud'] = self.general.topphraseswordcloud
+        writing['keywords'] = self.general.keywords
 
         metrics['general'] = general
         metrics['readability'] = readability
@@ -77,9 +77,3 @@ class score:
         metrics['writing'] = writing
         return metrics
 
-if __name__ == "__main__":
-    score = score()
-    a = "Tom hit Jerry. Jerry hit him back. tom was mad. Jerry is happy. Tom and Jerry not firends. This demonstrates that Tom and Jerry are not friends. Our hypothesis was wrong."
-
-    x = score.evaluation(a)
-    print(x)

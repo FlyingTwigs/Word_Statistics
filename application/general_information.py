@@ -26,6 +26,7 @@ class general_information:
         self.namedentity = None
         self.topphrases = None
         self.topphraseswordcloud = None
+        self.keywords = None
 
     def generate_score(self, text):
         self.languagedetect(text)
@@ -39,6 +40,7 @@ class general_information:
         self.part_of_speech(text)
         self.named_entity(text)
         self.extract_phrases(text)
+        self.extract_keywords(text)
         pass
 
     def languagedetect(self, text):
@@ -81,15 +83,16 @@ class general_information:
     def part_of_speech(self, text):
         document = nlp(text)
         c = Counter([token.pos_ for token in document if token.is_punct != True and token.is_space != True])
-        part_of_speech = {}
-        part_of_speech_percentage = {}
-        posp = lexicalmetrics.objdict(part_of_speech_percentage)
-        pos = lexicalmetrics.objdict(part_of_speech)
+        part_of_speech = dict()
+        part_of_speech_percentage = dict()
         sbase = sum(c.values())
         for el, cnt in c.items():
             percentage = '{0:2.2f}%'.format((100.0* cnt)/sbase)
-            self.partofspeechpercentage = pos.__setattr__(el, percentage)
-            self.partofspeech = pos.__setattr__(el, cnt)
+            part_of_speech[el] = cnt
+            part_of_speech_percentage[el] = percentage
+
+        self.partofspeech = part_of_speech
+        self.partofspeechpercentage = part_of_speech_percentage
         pass
 
     def named_entity(self, text):
@@ -105,3 +108,9 @@ class general_information:
         self.topphrases = dict(token_words.most_common(10))
         self.topphraseswordcloud = dict(token_words.most_common(30))
         pass
+
+    def extract_keywords(self, text):
+        r = Rake()
+        r.extract_keywords_from_text(text)
+        ranked_phrases = r.get_ranked_phrases()
+        self.keywords = list(ranked_phrases)[0:9]
