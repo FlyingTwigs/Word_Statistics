@@ -1,4 +1,5 @@
 # Word_Statistics
+[![Build Status](https://api.travis-ci.com/FlyingTwigs/Word_Statistics.svg?branch=master](https://travis-ci.com/github/FlyingTwigs/Word_Statistics)
 
 Produce a word statistics in form of JSON
 
