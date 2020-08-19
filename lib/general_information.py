@@ -3,7 +3,6 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import re
 from lexical_diversity import lex_div as ld
 import spacy
-import lexicalmetrics
 from rake_nltk import Rake
 from collections import  Counter
 # python -m spacy download en_core_web_sm

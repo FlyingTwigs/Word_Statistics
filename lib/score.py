@@ -4,7 +4,7 @@ import general_information
 import string
 from nltk.tokenize import word_tokenize
 
-class score:
+class Score:
     def __init__(self):
         self.lex = lexicalmetrics.lexicalmetrics()
         self.readability = readability.readability()
@@ -77,3 +77,6 @@ class score:
         metrics['writing'] = writing
         return metrics
 
+
+if __name__ == "__main__":
+    score()

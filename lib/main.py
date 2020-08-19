@@ -1,6 +1,6 @@
 import argparse
 import textwrap
-from score import score
+from score import Score
 import os
 import json
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
                                     If no parameter given, the name of file will be    
                                                 statistics_<file_name>.json
                                     
-                            Example: python application/main.py -g pdf_concept_category/001.txt
+                                Example: python lib/main.py -g pdf_concept_category/001.txt
                                     '''))
     parser.add_argument("file", type=str, help="Input file in form of txt files")
     group = parser.add_mutually_exclusive_group()
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     body = read_file(args.file)
 
-    score = score()
+    score = Score()
     result = body
     
     stats = score.evaluation(body)
@@ -67,6 +67,7 @@ if __name__ == "__main__":
     file_name = os.path.basename(args.file)
 
     basepath = os.path.dirname(os.path.realpath(__file__))
+    # print(basepath)
     directory = "output_files"
 
     if not os.path.exists(directory):
