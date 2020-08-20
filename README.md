@@ -10,7 +10,7 @@ Produce a word statistics in form of JSON
 # Help
 
 ```
-python3 word_statistics.py -h
+python3 lib/main.py -h
 ```
 
 As this program may cause error from not having the language library from SpaCy, please download it first by executing
