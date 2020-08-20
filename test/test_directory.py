@@ -1,4 +1,5 @@
 import pytest
+from unittest import mock
 import os
 from lib.score import Score
 
@@ -15,9 +16,13 @@ def test_text(tmp_path):
     assert len(p.read_text().split()) == 4
     
 
-""" 
 def test_score(tmp_path):
-    s = score.evaluation(p)
+    s = score.evaluation(CONTENT)
     assert s['general'] is not None
-"""
-    
+    assert s['writing'] is not None
+    assert s['lexical'] is not None
+    assert s['readability'] is not None
+    assert s['general']['language'] is not None
+    assert s['readability']['flesch_reading_grade_consensus'] is not None
+    assert s['lexical']['wordfrequency_all'] is not None
+    assert s['writing']['top_8_named_entity'] is not None
