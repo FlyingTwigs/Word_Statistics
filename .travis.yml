@@ -14,6 +14,6 @@ install:
 jobs:
   include:
     - python: "3.7"
-      env: TEST_SUITE=suite_3_7
+      
 
-script: python test/test_directory.py $TEST_SUITE
+script: pytest

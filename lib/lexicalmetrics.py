@@ -4,10 +4,10 @@ from nltk.corpus import stopwords
 import os
 
 basepath = os.path.dirname(os.path.realpath(__file__))
-print(basepath)
+# print(basepath)
 miscpath = 'misc'
 joined_path = os.path.join(basepath, miscpath)
-print(joined_path)
+# print(joined_path)
 mycwd = os.getcwd()
 
 class Lexicalmetrics:
