@@ -4,10 +4,13 @@ from nltk.corpus import stopwords
 import os
 
 basepath = os.path.dirname(os.path.realpath(__file__))
+print(basepath)
 miscpath = 'misc'
 joined_path = os.path.join(basepath, miscpath)
+print(joined_path)
+mycwd = os.getcwd()
 
-class lexicalmetrics:
+class Lexicalmetrics:
     def __init__(self):
         self.wordfrequency_all = None
         self.wordfrequency_context = None
@@ -42,6 +45,7 @@ class lexicalmetrics:
             mrc_meaningfulness_c = f4.read().splitlines()
             mrc_meaningfulness_p = f5.read().splitlines()
             mrc_ageofacquisition = f6.read().splitlines()
+            os.chdir(mycwd)
         except IOError:
             print("Could Not Read From File.")
             exit()
@@ -255,4 +259,3 @@ class lexicalmetrics:
             ageofacquisition = scoresum/count
         self.ageofacquisitionscore = ageofacquisition
         pass
-

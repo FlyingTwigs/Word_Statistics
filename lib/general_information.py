@@ -10,7 +10,7 @@ from collections import  Counter
 
 nlp = spacy.load("en_core_web_sm")
 
-class general_information:
+class GeneralInformation:
     def __init__(self):
         self.language = None
         self.sentence_length = None

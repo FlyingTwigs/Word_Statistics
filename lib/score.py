@@ -1,14 +1,17 @@
-import lexicalmetrics
-import readability
-import general_information
+import os, sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
+
+from lib.lexicalmetrics import Lexicalmetrics
+from lib.readability import Readability
+from lib.general_information import GeneralInformation
 import string
 from nltk.tokenize import word_tokenize
 
 class Score:
     def __init__(self):
-        self.lex = lexicalmetrics.lexicalmetrics()
-        self.readability = readability.readability()
-        self.general = general_information.general_information()
+        self.lex = Lexicalmetrics()
+        self.readability = Readability()
+        self.general = GeneralInformation()
 
     def scale_freq(self, score):
         scaled = (1 - ((score-1)/5776384)) * 100

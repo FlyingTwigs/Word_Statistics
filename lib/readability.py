@@ -30,7 +30,7 @@ def flesch_reading_consensus(score):
             result_index = 100
         return result[result_index]
 
-class readability:
+class Readability:
     def __init__(self):
         self.flesch_reading_grade = None
         self.flesch_reading_grade_consensus = None
