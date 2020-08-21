@@ -1,5 +1,5 @@
 # Python cache
-lib/__pycache__/
+__pycache__/
 *.py[cod]
 *$py.class
 .pytest_cache/
@@ -12,3 +12,9 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Output files
+output_files/
+
+# Files
+pdf_concept_category/

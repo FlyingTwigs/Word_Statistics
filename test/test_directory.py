@@ -2,6 +2,9 @@ import pytest
 from unittest import mock
 import os
 from lib.score import Score
+from lib.main import create_parser
+import argparse
+from unittest import mock
 
 CONTENT = "hello hello hello. test."
 score = Score()
@@ -26,3 +29,12 @@ def test_score(tmp_path):
     assert s['readability']['flesch_reading_grade_consensus'] is not None
     assert s['lexical']['wordfrequency_all'] is not None
     assert s['writing']['top_8_named_entity'] is not None
+    assert s['general']['word_length'] == 4
+    assert s['general']['language'] == "en"
+    assert s['general']['characters_length'] == 21
+    assert s['general']['sentence_length'] == 2
+
+""" @mock.patch('argparse.ArgumentParser.parse_args')
+def test_argument():
+    res = create_parser()
+    assert res ==  """
