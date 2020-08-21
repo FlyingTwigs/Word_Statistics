@@ -1,6 +1,4 @@
-import argparse
-import textwrap
-from score import Score
+from score import Score, create_parser
 import os
 import json
 
@@ -28,30 +26,6 @@ def read_file(filename):
     with open(filename, 'r', encoding="utf-8") as f:
         text = f.read()
         return text
-
-def create_parser():
-    parser = argparse.ArgumentParser(   formatter_class=argparse.RawDescriptionHelpFormatter,
-                                    description=textwrap.dedent('''\
-                                            Produce statistics for your word
-                                            --------------------------------
-                                                The file produced by this
-                                                    program is json
-                                                   You can find them in
-                                                folder 'result/<file_name> 
-                                    
-                                    Output: statistics_<file_name>_<parameter>.json
-                                    If no parameter given, the name of file will be    
-                                                statistics_<file_name>.json
-                                    
-                                 Example: python lib/main.py -g pdf_concept_category/001.txt
-                                    '''))
-    parser.add_argument("file", type=str, help="Input file in form of txt files")
-    group = parser.add_mutually_exclusive_group()
-    group.add_argument("-g", "--general", help="Output general statistics", action='store_true')
-    group.add_argument("-r", "--readability", help="Output readability statistics", action='store_true')
-    group.add_argument("-w", "--writing", help="Output writing statistics", action='store_true')
-    group.add_argument("-l", "--lexical", help="Outpuut lexical metrics", action="store_true")
-    return parser
 
 if __name__ == "__main__":
     parser = create_parser()

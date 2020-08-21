@@ -1,8 +1,7 @@
 import pytest
 from unittest import mock
 import os
-from lib.score import Score
-from lib.main import create_parser
+from lib.score import Score, create_parser
 import argparse
 from unittest import mock
 
