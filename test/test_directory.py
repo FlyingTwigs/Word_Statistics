@@ -38,9 +38,10 @@ def test_argument(tmp_path):
     d = tmp_path / "sub"
     d.mkdir()
     p = d / "testing.txt"
+    pathing = os.path.join(tmp_path, "sub")
     p.write_text(CONTENT)
     parser = create_parser()
-    argv = ('-g {}/sub/testing.txt'.format(tmp_path)).split()
+    argv = ('-g {}/testing.txt'.format(pathing)).split()
     args = parser.parse_args(argv)
     assert args.general == True
     assert args.file == p
