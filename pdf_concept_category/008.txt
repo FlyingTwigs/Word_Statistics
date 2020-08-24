@@ -11,7 +11,6 @@ the strongest prediction power for both the ‘General Scholastic Ability Test-C
 and the ‘Department Required Test-Chinese’ beyond the joint contributions of vocabulary size and reading comprehension. By sharing the process of developing the instrument, we shed some light for researchers from regions other than English-speaking
 countries on how they might move forward in future investigations.
 
-
 There is tremendous variation in literacy habits. Researchers in Western cultures have
 linked such variation in college students’ print exposure to their variability in
 reading-related skills, such as lexical-decision latency (Chateau & Jared, 2000), spelling
@@ -119,7 +118,7 @@ In summary, previous studies from English-speaking countries have used
 various measures of print exposure for college students: self-reported reading
 habits, self-reported CRH and objective print exposure measures such as the ART.
 The relationships between print exposure, and reading-related skills or general reading
-performance have been well-established, especially between the ART and the readingrelated performance. Compared with studies from Western cultures, investigations of
+performance have been well-established, especially between the ART and the readingrelated performance. Compared with studies from Western cultures, investigations of 
 college students’ print exposure and its relationship with reading-related performance
 in Taiwan have been limited. This paper represents one of the first efforts dedicated to
 this topic.

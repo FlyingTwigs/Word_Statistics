@@ -10,7 +10,7 @@ import argparse
 import textwrap
 
 def create_parser():
-    parser = argparse.ArgumentParser(   formatter_class=argparse.RawDescriptionHelpFormatter,
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
                                     description=textwrap.dedent('''\
                                             Produce statistics for your word
                                             --------------------------------

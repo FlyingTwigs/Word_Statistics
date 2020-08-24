@@ -3,10 +3,10 @@ from unittest import mock
 import os
 from lib.score import Score, create_parser
 import argparse
-from unittest import mock
 
 CONTENT = "hello hello hello. test."
 score = Score()
+
 
 def test_text(tmp_path):
     d = tmp_path / "sub"
@@ -33,7 +33,14 @@ def test_score(tmp_path):
     assert s['general']['characters_length'] == 21
     assert s['general']['sentence_length'] == 2
 
-""" @mock.patch('argparse.ArgumentParser.parse_args')
-def test_argument():
-    res = create_parser()
-    assert res ==  """
+
+def test_argument(tmp_path):
+    d = tmp_path / "sub"
+    d.mkdir()
+    p = d / "testing.txt"
+    p.write_text(CONTENT)
+    parser = create_parser()
+    argv = ('-g {}/sub/testing.txt'.format(tmp_path)).split()
+    args = parser.parse_args(argv)
+    assert args.general == True
+    assert args.file == p
