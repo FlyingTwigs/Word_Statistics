@@ -70,7 +70,7 @@ Instead of heavily reliant on the average word length in syllables, Flesch-Kinca
 Established in 1969 by G. Harry McLaughlin, this readability grading system is widely used and preferred for checking health messages. SMOG is an acronym for "Simple Measure of Gobbledygook".
 
 ### Formula  
-![SMOG Grade = 1.0430($\sqrt{number of polysyllables x (30 / number of sentences)}) + 3.1291](http://www.sciweavers.org/tex2img.php?eq=grade%20%3D%201.0430%5Csqrt%7Btotal%20polysyllables%20%5Ctimes%20%5Cdfrac%7B30%7D%7Btotal%20sentences%7D%7D%20%2B%203.1291&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+![SMOG Grade = 1.0430($\sqrt{number of polysyllables x (30 / number of sentences)}) + 3.1291](http://www.sciweavers.org/tex2img.php?eq=grade%20%3D%201.0430%5Csqrt%7Btotal%20polysyllables%20%5Ctimes%20%5Cdfrac%7B30%7D%7Btotal%20sentences%7D%7D%20%2B%203.1291&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)  
 
 Even though this readability test is well tested in English, it lacks statistical validity in other languages.  
 Since the formula was normed on 30-sentence sample text, texts of fewer than 30 sentences are statistically invalid. 
@@ -80,7 +80,7 @@ Since the formula was normed on 30-sentence sample text, texts of fewer than 30 
 Established by Edgar Dale and Jeanne Chall in 1948, this readability test was inspired by Flesch Reading ease test and mostly used in evaluating comprehension difficulty of the text.
 
 ### Formula
-![Dale-chall grade = 0.1579(difficult words/words * 100)](http://www.sciweavers.org/tex2img.php?eq=grade%20%3D%200.1579%5Cleft%28%5Cdfrac%7Bdifficult%20words%7D%7Bwords%7D%20%5Ctimes%20100%5Cright%29%20%2B%200.0496%5Cleft%28%20%5Cdfrac%7Bwords%7D%7Bsentence%7D%20%5Cright%29%0A&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+![Dale-chall grade = 0.1579(difficult words/words * 100)](http://www.sciweavers.org/tex2img.php?eq=grade%20%3D%200.1579%5Cleft%28%5Cdfrac%7Bdifficult%20words%7D%7Bwords%7D%20%5Ctimes%20100%5Cright%29%20%2B%200.0496%5Cleft%28%20%5Cdfrac%7Bwords%7D%7Bsentence%7D%20%5Cright%29%0A&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)  
 
 If the percentage of difficult words is above 5%, then add 3.6365 to the raw score to get the adjusted score, otherwise the adjusted score is equal to the raw score. Difficult words are all words that are not on the word list, but you have to consider that the word list contains the basic forms of e.g. verbs and nouns, you have to add regular plurals of nouns, regular past tense forms, progressive forms of verbs etc.
 
@@ -89,7 +89,7 @@ If the percentage of difficult words is above 5%, then add 3.6365 to the raw sco
 Established in 1967, this readability test was designed for military use and intended for monitoring of readability on electric typewriters.
 
 ### Formula
-![ARI grade = 4.71(characters/words) + 0.5(words/sentences) - 21.43](http://www.sciweavers.org/tex2img.php?eq=grade%20%3D%204.71%5Cleft%28%5Cdfrac%7Bcharacters%7D%7Bwords%7D%5Cright%29%20%2B%200.5%5Cleft%28%5Cdfrac%7Bwords%7D%7Bsentences%7D%5Cright%29%20-%2021.43&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+![ARI grade = 4.71(characters/words) + 0.5(words/sentences) - 21.43](http://www.sciweavers.org/tex2img.php?eq=grade%20%3D%204.71%5Cleft%28%5Cdfrac%7Bcharacters%7D%7Bwords%7D%5Cright%29%20%2B%200.5%5Cleft%28%5Cdfrac%7Bwords%7D%7Bsentences%7D%5Cright%29%20-%2021.43&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)  
 
 Non-integer scores are always rounded up to the nearest whole number, so a score of 10.1 or 10.6 would be converted to 11. 
 
@@ -98,6 +98,6 @@ Non-integer scores are always rounded up to the nearest whole number, so a score
 Established in 1975 by Meri Coleman and T.L Liau, this readability test follows Automated Readability Index (ARI) in its method of scoring, which focus more on length of characters instead of syllables.
 
 ### Formula
-![Coleman-Liau Grade = 0.0588L - 0.296S - 15.8](http://www.sciweavers.org/tex2img.php?eq=grade%20=%200.0588L%20-%200.296S%20-%2015.8&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+![Coleman-Liau Grade = 0.0588L - 0.296S - 15.8](http://www.sciweavers.org/tex2img.php?eq=grade%20=%200.0588L%20-%200.296S%20-%2015.8&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)  
 L stands for average number of letters per 100 words  
 S stands for average number of sentences per 100 words.
