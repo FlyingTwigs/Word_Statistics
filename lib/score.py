@@ -84,11 +84,11 @@ class Score:
         readability['ari_grade'] = self.readability.ari_grade
         readability['coleman_liau_grade'] = self.readability.coleman_liau_grade
 
-        lexical['wordfrequency_all'] = self.scale_freq(self.lex.wordfrequency_all)
+        lexical['wordfrequency_all'] = float('{:.2f}'.format(self.scale_freq(self.lex.wordfrequency_all)))
         lexical['wordfrequency_content'] = self.lex.wordfrequency_content
         lexical['wordfrequency_function'] = self.lex.wordfrequency_function
-        lexical['wordrangescore'] = self.scale_wordrange(self.lex.wordrangescore)
-        lexical['familiarityscore'] = self.scale_familiarity(self.lex.familiarityscore)
+        lexical['wordrangescore'] = float('{:.2f}'.format(self.scale_wordrange(self.lex.wordrangescore)))
+        lexical['familiarityscore'] = float('{:.2f}'.format(self.scale_familiarity(self.lex.familiarityscore)))
         lexical['concretenessscore'] = self.lex.concretenessscore
         lexical['imagabilityscore'] = self.lex.imagabilityscore
         lexical['meaningfulnesscscore'] = self.lex.meaningfulnesscscore

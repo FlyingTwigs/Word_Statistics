@@ -85,7 +85,7 @@ class Lexicalmetrics:
             imagabilitylist[word] = int(score)
 
         for i in range (1, len(mrc_ageofacquisition)):
-            word, score = mrc_ageofacquisition[i].split()
+            word, score = mrc_ageofacquisition[i].split(sep="      ")
             ageofacquisitionlist[word] = int(score)
 
         for i in range (1, len(mrc_meaningfulness_c)):
@@ -136,8 +136,11 @@ class Lexicalmetrics:
                 freqsum += freqlist[w]
                 count +=1
         
-        if count != 0:
-            self.wordfrequency_all = freqsum/count
+        if count == 0:
+            wordfa = 0
+        else:
+            wordfa = float('{:.2f}'.format(freqsum/count))
+        self.wordfrequency_all = wordfa
         pass
 
     def wordfrequencycontent(self, tokenized_text, contentlist):
@@ -148,8 +151,11 @@ class Lexicalmetrics:
             if w in contentlist:
                 freqsum += contentlist[w]
                 count +=1
-        if count != 0:
-            self.wordfrequency_content = freqsum/count
+        if count == 0:
+            wordfc = 0
+        else: 
+            wordfc = float('{:.2f}'.format(freqsum/count))
+        self.wordfrequency_content = wordfc
         pass
 
     def wordfrequencyfunction(self, tokenized_text, functionlist):
@@ -160,20 +166,25 @@ class Lexicalmetrics:
             if w in functionlist:
                 freqsum += functionlist[w]
                 count +=1
-        if count != 0:
-            self.wordfrequency_function = freqsum/count
+        if count == 0:
+            wordff = 0
+        else:
+            wordff = float('{:.2f}'.format(freqsum/count))
+        self.wordfrequency_function = wordff
         pass
     
     def wordrange(self, tokenized_text, occurlist):
-        self.wordrangescore = 0
         count = 0
         occursum = 0
         for w in tokenized_text:
             if w in occurlist:
                 occursum += occurlist[w]
                 count += 1
-        if count != 0:
-            self.wordrangescore = occursum/count
+        if count == 0:
+            wordrange = 0
+        else:
+            wordrange = float('{:.2f}'.format(occursum/count))
+        self.wordrangescore = wordrange
         pass
 
     def wordfamiliarity(self,tokenized_text, scorelist):
@@ -184,9 +195,9 @@ class Lexicalmetrics:
                 scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
-            familiarity = "not applicable"
+            familiarity = 0
         else:
-            familiarity = scoresum/count
+            familiarity = float('{:.2f}'.format(scoresum/count))
         self.familiarityscore = familiarity
         pass
 
@@ -198,9 +209,9 @@ class Lexicalmetrics:
                 scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
-            concreteness = "not applicable"
+            concreteness = 0
         else:
-            concreteness = scoresum/count
+            concreteness = float('{:.2f}'.format(scoresum/count))
         self.concretenessscore = concreteness
         pass
                     
@@ -212,9 +223,9 @@ class Lexicalmetrics:
                 scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
-            imagability = "not applicable"
+            imagability = 0
         else:
-            imagability = scoresum/count
+            imagability = float('{:.2f}'.format(scoresum/count))
         self.imagabilityscore = imagability
         pass
 
@@ -226,9 +237,9 @@ class Lexicalmetrics:
                 scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
-            meaningfulness_c = "not applicable"
+            meaningfulness_c = 0
         else:
-            meaningfulness_c = scoresum/count
+            meaningfulness_c = float('{:.2f}'.format(scoresum/count))
         self.meaningfulnesscscore = meaningfulness_c
         pass
 
@@ -240,9 +251,9 @@ class Lexicalmetrics:
                 scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
-            meaningfulness_p = "not applicable"
+            meaningfulness_p = 0
         else:
-            meaningfulness_p = scoresum/count
+            meaningfulness_p = float('{:.2f}'.format(scoresum/count))
         self.meaningfulnesspscore = meaningfulness_p
         pass
 
@@ -250,12 +261,12 @@ class Lexicalmetrics:
         count = 0
         scoresum = 0
         for w in tokenized_text:
-            if w.upper() in scorelist:
-                scoresum += scorelist[w.upper()]
+            if w.lower() in scorelist:
+                scoresum += scorelist[w.lower()]
                 count += 1
         if count == 0:
-            ageofacquisition = "not applicable"
+            ageofacquisition = 0
         else:
-            ageofacquisition = scoresum/count
+            ageofacquisition = float('{:.2f}'.format(scoresum/count))
         self.ageofacquisitionscore = ageofacquisition
         pass
