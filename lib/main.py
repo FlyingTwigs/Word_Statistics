@@ -1,6 +1,7 @@
 from score import Score, create_parser
 import os
 import json
+import time
 
 def associative_rules(processed_body):
     feedback_text = ""
@@ -36,12 +37,18 @@ if __name__ == "__main__":
 
     score = Score()
     result = body
+
+    start_time = time.time()
     
     stats = score.evaluation(body)
     feedback_text = associative_rules(stats)
     stats["feedback_text"] = feedback_text
 
+    stats["time_process"] = '{:.3f} seconds'.format(time.time() - start_time)
+
     file_name = os.path.basename(args.file)
+
+    stats["file_name"] = os.path.splitext(file_name)[0]
 
     basepath = os.path.dirname(os.path.realpath(__file__))
     # print(basepath)
