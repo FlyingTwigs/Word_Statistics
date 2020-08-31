@@ -2,6 +2,7 @@ from score import Score, create_parser
 import os
 import json
 import time
+import datetime
 
 def associative_rules(processed_body):
     feedback_text = ""
@@ -38,11 +39,13 @@ if __name__ == "__main__":
     score = Score()
     result = body
 
+    process_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     start_time = time.time()
     
     stats = score.evaluation(body)
     feedback_text = associative_rules(stats)
     stats["feedback_text"] = feedback_text
+    stats["file_time_proceessed"] = process_time
 
     stats["time_process"] = '{:.3f} seconds'.format(time.time() - start_time)
 
