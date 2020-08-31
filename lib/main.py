@@ -47,7 +47,7 @@ if __name__ == "__main__":
     stats["feedback_text"] = feedback_text
     stats["file_time_proceessed"] = process_time
 
-    stats["time_process"] = '{:.3f} seconds'.format(time.time() - start_time)
+    stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
 
     file_name = os.path.basename(args.file)
 
