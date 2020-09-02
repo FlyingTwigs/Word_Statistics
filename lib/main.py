@@ -1,4 +1,5 @@
 from score import Score, create_parser
+from contextual import gendercode
 import os
 import json
 import time
@@ -52,6 +53,10 @@ if __name__ == "__main__":
     file_name = os.path.basename(args.file)
 
     stats["file_name"] = os.path.splitext(file_name)[0]
+
+    # Section: Contextual
+    stats["contextual"] = {}
+    stats["contextual"]["gendercode"] = gendercode(body)
 
     basepath = os.path.dirname(os.path.realpath(__file__))
     # print(basepath)
