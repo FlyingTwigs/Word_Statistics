@@ -40,7 +40,7 @@ us_grade_level_system = {
                         range(19, 20): 'sophomore year (college)',
                         range(20, 21): 'junior year (college)',
                         range(21, 22): 'senior year (college)',
-                        range(22, 23): 'graduate school'
+                        range(22, 24): 'graduate school'
 }
 
 dale_chall_system = {

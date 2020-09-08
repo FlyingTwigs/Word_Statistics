@@ -78,6 +78,8 @@ class Score:
 
         readability['flesch_reading_ease'] = self.readability.flesch_reading_grade
         readability['flesch_reading_grade_consensus'] = self.readability.flesch_reading_grade_consensus
+        readability['flesch_kincaid_grade'] = self.readability.flesch_kincaid_grade
+        readability['flesch_kincaid_grade_consensus'] = self.readability.flesch_kincaid_grade_consensus
         readability['dale_chall_grade'] = self.readability.dale_chall_grade
         readability['flesch_kincaid_grade'] = self.readability.flesch_kincaid_grade
         readability['smog_grade'] = self.readability.smog_grade
