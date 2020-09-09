@@ -68,8 +68,8 @@ def readability_test_consensus(score, grading_system):
         elif grading_system == dale_chall_system:
             if result_index < 4:
                 result_index = 4
-            elif result_index > 10:
-                result_index = 10
+            elif result_index > 9:
+                result_index = 9
         return result[result_index]
 
 class Readability:
@@ -90,7 +90,7 @@ class Readability:
         self.flesch_kincaid_grade = ts.flesch_kincaid_grade(text)
         self.flesch_kincaid_grade_consensus = readability_test_consensus(self.flesch_kincaid_grade, us_grade_level_system)
         self.dale_chall_grade = ts.dale_chall_readability_score(text)
-        self.flesch_kincaid_grade = ts.flesch_kincaid_grade(text)
+        self.dale_chall_grade_consensus = readability_test_consensus(self.dale_chall_grade, dale_chall_system)
         self.smog_grade = ts.smog_index(text)
         self.ari_grade = ts.automated_readability_index(text)
         self.coleman_liau_grade = ts.coleman_liau_index(text)

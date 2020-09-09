@@ -51,6 +51,22 @@ class Score:
         scaled = (1-((score - 1)/(3209 - 1))) * 100
         return scaled
 
+    def scale_concreteness(self, score):
+        scaled = ((score - 158)/(662 - 158)) * 100
+        return scaled 
+    
+    def scale_imageability(self, score):
+        scaled = ((score - 129)/(667 - 129)) * 100
+        return scaled
+
+    def scale_meaningfulnessc(self, score):
+        scaled = ((score - 127)/(617 - 127)) * 100
+        return scaled
+
+    def scale_meaningfulnessp(self, score):
+        scaled = ((score - 192)/700 - 192) * 100
+        return scaled
+
     def evaluation(self, text):
         nopunc_text = text.translate(str.maketrans('','',string.punctuation))
         tokenized_text = word_tokenize(nopunc_text)
@@ -91,8 +107,8 @@ class Score:
         lexical['wordfrequency_function'] = self.lex.wordfrequency_function
         lexical['wordrangescore'] = float('{:.2f}'.format(self.scale_wordrange(self.lex.wordrangescore)))
         lexical['familiarityscore'] = float('{:.2f}'.format(self.scale_familiarity(self.lex.familiarityscore)))
-        lexical['concretenessscore'] = self.lex.concretenessscore
-        lexical['imagabilityscore'] = self.lex.imagabilityscore
+        lexical['concretenessscore'] = float('{:.2f}'.format(self.scale_concreteness(self.lex.concretenessscore)))
+        lexical['imagabilityscore'] = float('{:.2f}'.format(self.scale_imageability(self.lex.imagabilityscore)))
         lexical['meaningfulnesscscore'] = self.lex.meaningfulnesscscore
         lexical['meaningfulnesspscore'] = self.lex.meaningfulnesspscore
         lexical['ageofacquisitionscore'] = self.lex.ageofacquisitionscore
