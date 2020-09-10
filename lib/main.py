@@ -1,5 +1,6 @@
 from score import Score, create_parser
 from contextual import gendercode
+from nlp import rungec, runpos
 import os
 import json
 import time
@@ -57,6 +58,8 @@ if __name__ == "__main__":
     # Section: Contextual
     stats["contextual"] = {}
     stats["contextual"]["gendercode"] = gendercode(body)
+    stats["contextual"]["gec"] = rungec(body)
+    stats["contextual"]["pos"] = runpos(body)
 
     basepath = os.path.dirname(os.path.realpath(__file__))
     # print(basepath)
