@@ -52,7 +52,7 @@ class Score:
         return scaled
 
     def scale_concreteness(self, score):
-        scaled = ((score - 158)/(662 - 158)) * 100
+        scaled = ((score - 158)/(670 - 158)) * 100
         return scaled 
     
     def scale_imageability(self, score):
@@ -64,7 +64,11 @@ class Score:
         return scaled
 
     def scale_meaningfulnessp(self, score):
-        scaled = ((score - 192)/700 - 192) * 100
+        scaled = ((score - 192)/(922 - 192)) * 100
+        return scaled
+
+    def scale_ageofacquisition(self, score):
+        scaled = ((score - 125)/(697 - 125)) * 100
         return scaled
 
     def evaluation(self, text):
@@ -106,11 +110,17 @@ class Score:
         lexical['wordfrequency_content'] = self.lex.wordfrequency_content
         lexical['wordfrequency_function'] = self.lex.wordfrequency_function
         lexical['wordrangescore'] = float('{:.2f}'.format(self.scale_wordrange(self.lex.wordrangescore)))
-        lexical['familiarityscore'] = float('{:.2f}'.format(self.scale_familiarity(self.lex.familiarityscore)))
-        lexical['concretenessscore'] = float('{:.2f}'.format(self.scale_concreteness(self.lex.concretenessscore)))
-        lexical['imagabilityscore'] = float('{:.2f}'.format(self.scale_imageability(self.lex.imagabilityscore)))
+        lexical['familiarityscale'] = float('{:.2f}'.format(self.scale_familiarity(self.lex.familiarityscore)))
+        lexical['familiarityscore'] = self.lex.familiarityscore
+        lexical['concretenessscale'] = float('{:.2f}'.format(self.scale_concreteness(self.lex.concretenessscore)))
+        lexical['concretenessscore'] = self.lex.concretenessscore
+        lexical['imagabilityscale'] = float('{:.2f}'.format(self.scale_imageability(self.lex.imagabilityscore)))
+        lexical['imagabilityscore'] = self.lex.imagabilityscore
+        lexical['meaningfulnesscscale'] = float('{:.2f}'.format(self.scale_meaningfulnessc(self.lex.meaningfulnesscscore)))
         lexical['meaningfulnesscscore'] = self.lex.meaningfulnesscscore
+        lexical['meaningfulnesspscale'] = float('{:.2f}'.format(self.scale_meaningfulnessp(self.lex.meaningfulnesspscore)))
         lexical['meaningfulnesspscore'] = self.lex.meaningfulnesspscore
+        lexical['ageofacquisitionscale'] = float('{:.2f}'.format(self.scale_ageofacquisition(self.lex.ageofacquisitionscore)))
         lexical['ageofacquisitionscore'] = self.lex.ageofacquisitionscore
 
         writing['top_8_named_entity'] = self.general.namedentity
@@ -123,7 +133,6 @@ class Score:
         metrics['lexical'] = lexical
         metrics['writing'] = writing
         return metrics
-
 
 if __name__ == "__main__":
     Score()
