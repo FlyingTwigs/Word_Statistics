@@ -85,7 +85,7 @@ class Lexicalmetrics:
             imagabilitylist[word] = int(score)
 
         for i in range (1, len(mrc_ageofacquisition)):
-            word, score = mrc_ageofacquisition[i].split(sep="      ")
+            word, score = mrc_ageofacquisition[i].split()
             ageofacquisitionlist[word] = int(score)
 
         for i in range (1, len(mrc_meaningfulness_c)):
@@ -261,8 +261,8 @@ class Lexicalmetrics:
         count = 0
         scoresum = 0
         for w in tokenized_text:
-            if w.lower() in scorelist:
-                scoresum += scorelist[w.lower()]
+            if w.upper() in scorelist:
+                scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
             ageofacquisition = 0
