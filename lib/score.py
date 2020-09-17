@@ -68,7 +68,7 @@ class Score:
         return scaled
 
     def scale_ageofacquisition(self, score):
-        scaled = ((score - 125)/(697 - 125)) * 100
+        scaled = (1 - (score - 125)/(697 - 125)) * 100
         return scaled
 
     def evaluation(self, text):
