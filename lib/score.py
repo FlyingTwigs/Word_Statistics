@@ -114,8 +114,8 @@ class Score:
         lexical['familiarityscore'] = self.lex.familiarityscore
         lexical['concretenessscale'] = float('{:.2f}'.format(self.scale_concreteness(self.lex.concretenessscore)))
         lexical['concretenessscore'] = self.lex.concretenessscore
-        lexical['imagabilityscale'] = float('{:.2f}'.format(self.scale_imageability(self.lex.imagabilityscore)))
-        lexical['imagabilityscore'] = self.lex.imagabilityscore
+        lexical['imageabilityscale'] = float('{:.2f}'.format(self.scale_imageability(self.lex.imageabilityscore)))
+        lexical['imageabilityscore'] = self.lex.imageabilityscore
         lexical['meaningfulnesscscale'] = float('{:.2f}'.format(self.scale_meaningfulnessc(self.lex.meaningfulnesscscore)))
         lexical['meaningfulnesscscore'] = self.lex.meaningfulnesscscore
         lexical['meaningfulnesspscale'] = float('{:.2f}'.format(self.scale_meaningfulnessp(self.lex.meaningfulnesspscore)))
