@@ -15,7 +15,7 @@ flesch_ease_grading_system = {
                         range(10, 30): 'very hard to read',
                         range(30, 50): 'hard to read',
                         range(50, 60): 'fairly hard to read',
-                        range(60, 70): 'easy to read',
+                        range(60, 70): 'plain english',
                         range(70, 80): 'fairly easy to read',
                         range(80, 90): 'easy to read',
                         range(90, 101): 'very easy to read'
