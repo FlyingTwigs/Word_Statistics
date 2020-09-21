@@ -18,7 +18,7 @@ class Lexicalmetrics:
         self.wordrangescore = None
         self.familiarityscore = None
         self.concretenessscore = None
-        self.imagabilityscore = None
+        self.imageabilityscore = None
         self.meaningfulnesscscore = None
         self.meaningfulnesspscore = None
         self.ageofacquisitionscore = None
@@ -29,7 +29,7 @@ class Lexicalmetrics:
             f = open('written.num', 'r', encoding='utf-8')
             f1 = open('familiarity.txt', 'r', encoding='utf-8')
             f2 = open('concreteness.txt', 'r', encoding='utf-8')
-            f3 = open('imagability.txt', 'r', encoding='utf-8')
+            f3 = open('imageability.txt', 'r', encoding='utf-8')
             f4 = open('meaningfulness_coloradonorms.txt', 'r', encoding='utf-8')
             f5 = open('meaningfulness_paivionorms.txt', 'r', encoding='utf-8')
             f6 = open('ageofacquisition.txt', 'r', encoding='utf-8')
@@ -41,7 +41,7 @@ class Lexicalmetrics:
             bnc = f.read().splitlines()
             mrc_familiarity = f1.read().splitlines()
             mrc_concreteness = f2.read().splitlines()
-            mrc_imagability = f3.read().splitlines()
+            mrc_imageability = f3.read().splitlines()
             mrc_meaningfulness_c = f4.read().splitlines()
             mrc_meaningfulness_p = f5.read().splitlines()
             mrc_ageofacquisition = f6.read().splitlines()
@@ -56,7 +56,7 @@ class Lexicalmetrics:
         functionlist = collections.defaultdict()
         familiaritylist = collections.defaultdict()
         concretenesslist = collections.defaultdict()
-        imagabilitylist = collections.defaultdict()
+        imageabilitylist = collections.defaultdict()
         ageofacquisitionlist = collections.defaultdict()
         meaningfulness_c_list = collections.defaultdict()
         meaningfulness_p_list = collections.defaultdict()
@@ -80,9 +80,9 @@ class Lexicalmetrics:
             word, score = mrc_concreteness[i].split()
             concretenesslist[word] = int(score)
 
-        for i in range (1, len(mrc_imagability)):
-            word, score = mrc_imagability[i].split()
-            imagabilitylist[word] = int(score)
+        for i in range (1, len(mrc_imageability)):
+            word, score = mrc_imageability[i].split()
+            imageabilitylist[word] = int(score)
 
         for i in range (1, len(mrc_ageofacquisition)):
             word, score = mrc_ageofacquisition[i].split()
@@ -120,7 +120,7 @@ class Lexicalmetrics:
         self.wordrange(tokenized_text, occurlist)
         self.wordfamiliarity(nostopwords_tokenized_text, familiaritylist)
         self.wordconcreteness(nostopwords_tokenized_text, concretenesslist)
-        self.wordimagability(nostopwords_tokenized_text, imagabilitylist)
+        self.wordimageability(nostopwords_tokenized_text, imageabilitylist)
         self.ageofacquisition(nostopwords_tokenized_text, ageofacquisitionlist)
         self.wordmeaningfulness_c(nostopwords_tokenized_text, meaningfulness_c_list)
         self.wordmeaningfulness_p(nostopwords_tokenized_text, meaningfulness_p_list)
@@ -215,7 +215,7 @@ class Lexicalmetrics:
         self.concretenessscore = concreteness
         pass
                     
-    def wordimagability(self,tokenized_text, scorelist):
+    def wordimageability(self,tokenized_text, scorelist):
         count = 0
         scoresum = 0
         for w in tokenized_text:
@@ -223,10 +223,10 @@ class Lexicalmetrics:
                 scoresum += scorelist[w.upper()]
                 count += 1
         if count == 0:
-            imagability = 0
+            imageability = 0
         else:
-            imagability = float('{:.2f}'.format(scoresum/count))
-        self.imagabilityscore = imagability
+            imageability = float('{:.2f}'.format(scoresum/count))
+        self.imageabilityscore = imageability
         pass
 
     def wordmeaningfulness_c(self,tokenized_text, scorelist):
