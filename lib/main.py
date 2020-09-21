@@ -1,6 +1,5 @@
 from score import Score, create_parser
-from contextual import gendercode
-from nlp import rungec, runpos
+from nlp import rungec, runpos, runsentiment, rungendercode
 import os
 import json
 import time
@@ -49,17 +48,19 @@ if __name__ == "__main__":
     stats["feedback_text"] = feedback_text
     stats["file_time_proceessed"] = process_time
 
-    stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
-
     file_name = os.path.basename(args.file)
 
     stats["file_name"] = os.path.splitext(file_name)[0]
 
     # Section: Contextual
     stats["contextual"] = {}
-    stats["contextual"]["gendercode"] = gendercode(body)
+    stats["contextual"]["gendercode"] = rungendercode(body)
     stats["contextual"]["gec"] = rungec(body)
     stats["contextual"]["pos"] = runpos(body)
+    stats["contextual"]["sentiment"] = runsentiment(body)
+
+    # Total computed time consumed
+    stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
 
     basepath = os.path.dirname(os.path.realpath(__file__))
     # print(basepath)

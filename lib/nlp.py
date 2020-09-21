@@ -1,4 +1,5 @@
 import os
+from textblob import TextBlob
 from vglib.vglib2 import Vglib
 
 ## New a `vglib` instance
@@ -16,6 +17,8 @@ vg.preload([
 vg.function_add('gec', 'Gec', path=os.path.dirname((os.path.dirname(os.path.realpath(__file__)))) + "/vgnlp/plugins/gec/main.py")
 vg.function_add('pos', 'Pos')
 vg.submodule_add('Spacywrap', 'Spacywrap')
+vg.function_add('sentiment', 'Sentiment', path=os.path.dirname((os.path.dirname(os.path.realpath(__file__)))) + "/vgnlp/plugins/sentiment/main.py")
+vg.function_add('gender', 'GenderIdentify')
 
 def eachgec(text1):
     ## Preprocessing
@@ -71,9 +74,75 @@ def runpos(text1):
 
     return [x for x in nlp.result["result"]]
 
+def runsentiment(text1):
+    lang = "eng"
+    language = TextBlob(str(text1)).detect_language()
+    if language != "en":
+        lang = "chi"
+
+    ## Setup an object of Sentiment Analysis
+    task_bs_description = {
+        "uuid": "",
+        "userid": "",
+        "timestamp_st": "",
+        "function": "sentiment",
+        "params": {
+            "text": text1,
+            "lang": lang, # Specify Language
+        },
+        "resources": {
+            "cpu": {},
+            "ram": {},
+            "storage": {},
+        }
+    }
+
+    worker = vg.task_dispatch(task_bs_description)
+
+    ## Execute the function: Sentiment Analysis
+    ret = worker.load_pipeline()
+    return ret
+
+def rungendercode(text1):
+    """
+    Calling Vglib::GenderIdentify
+
+    return json
+    """
+    global vg
+
+    ## Setup an object of Gender Identification
+    task_bs_description = {
+        "uuid": "",
+        "userid": "",
+        "timestamp_st": "",
+        "function": "gender",
+        "params": {
+            "text": text1,
+            "lang": "eng", # Specify input text language
+            "custom_dict_path": "./gender_dict.txt", # Custom dictionary: <word> <gender> <weight>\n
+            "show_suggestion": "1" # Turn on suggestions
+        },
+        "resources": {
+            "cpu": {},
+            "ram": {},
+            "storage": {},
+        }
+    }
+    worker = vg.task_dispatch(task_bs_description)
+
+    ## Execute the function: Gender Identification
+    ret = worker.load_pipeline()
+
+    return ret
+
 if __name__ == "__main__":
     text = "he am an girl."
     result = rungec(text)
     print(result)
     result = runpos(text)
+    print(result)
+    result = runsentiment(text)
+    print(result)
+    result = rungendercode(text)
     print(result)
