@@ -1,5 +1,5 @@
 from score import Score, create_parser
-from nlp import rungec, runpos, runsentiment, rungendercode
+from nlp import rungec, runpos, runsentiment, rungendercode, postcontext
 import os
 import json
 import time
@@ -58,6 +58,9 @@ if __name__ == "__main__":
     stats["contextual"]["gec"] = rungec(body)
     stats["contextual"]["pos"] = runpos(body)
     stats["contextual"]["sentiment"] = runsentiment(body)
+
+    # Section: Contextual-combine
+    stats["contextual"]["unify"] = postcontext(stats["contextual"])
 
     # Total computed time consumed
     stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
