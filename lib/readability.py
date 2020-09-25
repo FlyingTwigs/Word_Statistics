@@ -21,7 +21,7 @@ flesch_ease_grading_system = {
                         range(90, 101): 'very easy to read'
                         }
 
-us_grade_level_system = {
+""" us_grade_level_system_age = {
                         range(3, 5): 'pre-kindergarten',
                         range(5, 6): 'kindergarten',
                         range(6, 7): '1st grade',
@@ -43,6 +43,21 @@ us_grade_level_system = {
                         range(22, 24): 'graduate school'
 }
 
+us_grade_level_system_level = { 
+                        range(1,2): '1st grade',
+                        range(2,3): '2nd grade',
+                        range(3,4): '3rd grade',
+                        range(4,5): '4th grade',
+                        range(5,6): '5th grade',
+                        range(6,7): '6th grade',
+                        range(7,8): '7th grade',
+                        range(8,9): '8th grade',
+                        range(9,10): '9th grade (high school freshman)',
+                        range(10,11): '10th grade (high school sophomore)',
+                        range(11,12): '11th grade (high school junior)',
+                        range(12,13): '12th grade (high school senior)'
+}
+
 dale_chall_system = {
                 range(4, 5): '4th grade',
                 range(5, 6): '5th or 6th grade',
@@ -60,7 +75,7 @@ def readability_test_consensus(score, grading_system):
                 result_index = 0
             elif result_index > 100:
                 result_index = 100
-        elif grading_system == us_grade_level_system:
+        elif grading_system == us_grade_level_system_age:
             if result_index < 3:
                 result_index = 3
             elif result_index > 23:
@@ -70,7 +85,7 @@ def readability_test_consensus(score, grading_system):
                 result_index = 4
             elif result_index > 9:
                 result_index = 9
-        return result[result_index]
+        return result[result_index] """
 
 class Readability:
     def __init__(self):
@@ -81,17 +96,19 @@ class Readability:
         self.dale_chall_grade = None
         self.flesch_kincaid_grade = None
         self.smog_grade = None
+        self.ari_grade_consensus = None
         self.ari_grade = None
         self.coleman_liau_grade = None
         
     def generate_score(self, text):
         self.flesch_reading_grade = ts.flesch_reading_ease(text)
-        self.flesch_reading_grade_consensus = readability_test_consensus(self.flesch_reading_grade, flesch_ease_grading_system)
+        """ self.flesch_reading_grade_consensus = readability_test_consensus(self.flesch_reading_grade, flesch_ease_grading_system) """
         self.flesch_kincaid_grade = ts.flesch_kincaid_grade(text)
-        self.flesch_kincaid_grade_consensus = readability_test_consensus(self.flesch_kincaid_grade, us_grade_level_system)
+        """ self.flesch_kincaid_grade_consensus = readability_test_consensus(self.flesch_kincaid_grade, us_grade_level_system_age) """
         self.dale_chall_grade = ts.dale_chall_readability_score(text)
-        self.dale_chall_grade_consensus = readability_test_consensus(self.dale_chall_grade, dale_chall_system)
+        """  self.dale_chall_grade_consensus = readability_test_consensus(self.dale_chall_grade, dale_chall_system) """
         self.smog_grade = ts.smog_index(text)
+        """ self.ari_grade_consensus = readability_test_consensus(self.ari_grade, us_grade_level_system) """
         self.ari_grade = ts.automated_readability_index(text)
         self.coleman_liau_grade = ts.coleman_liau_index(text)
         pass
