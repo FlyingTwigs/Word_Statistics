@@ -26,6 +26,8 @@ class GeneralInformation:
         self.topphrases = None
         self.topphraseswordcloud = None
         self.keywords = None
+        self.numberfigure = None
+        self.count_numberfigure = None
 
     def generate_score(self, text):
         self.languagedetect(text)
@@ -40,6 +42,7 @@ class GeneralInformation:
         self.named_entity(text)
         self.extract_phrases(text)
         self.extract_keywords(text)
+        self.count_number_figure(text)
         pass
 
     def languagedetect(self, text):
@@ -67,6 +70,18 @@ class GeneralInformation:
     
     def unique_words(self, text):
         self.unique_words_length = len(list(set(re.findall('\w+', text.lower()))))
+        pass
+
+    def count_number_figure(self, text):
+        words = word_tokenize(text)
+        number_figure = []
+        for word in words:
+            match = re.search(
+                r'^\$?[-+]?[0-9]+([,.][0-9]+)?$', word)
+            if match:
+                number_figure.append(match.group())
+        self.numberfigure = number_figure
+        self.count_numberfigure = len(number_figure)
         pass
 
     def characters(self, text):
@@ -113,3 +128,5 @@ class GeneralInformation:
         r.extract_keywords_from_text(text)
         ranked_phrases = r.get_ranked_phrases()
         self.keywords = list(ranked_phrases)[0:9]
+        pass
+

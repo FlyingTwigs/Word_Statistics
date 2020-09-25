@@ -95,6 +95,8 @@ class Score:
         general['lexical_diversity'] = self.general.lexical_diversity
         general['part_of_speech'] = self.general.partofspeech
         general['part_of_speech_percentage'] = self.general.partofspeechpercentage
+        general['number_figure'] = self.general.numberfigure
+        general['count_numberfigure'] = self.general.count_numberfigure
 
         readability['flesch_reading_ease'] = self.readability.flesch_reading_grade
         readability['flesch_reading_grade_consensus'] = self.readability.flesch_reading_grade_consensus
