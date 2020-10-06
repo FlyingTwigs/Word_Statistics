@@ -97,6 +97,8 @@ class Score:
         general['part_of_speech_percentage'] = self.general.partofspeechpercentage
         general['number_figure'] = self.general.numberfigure
         general['count_numberfigure'] = self.general.count_numberfigure
+        general['maxlenword'] = self.general.maxlenword
+        general['maxlenwordcount'] = self.general.maxlenwordcount
 
         readability['flesch_reading_ease'] = self.readability.flesch_reading_grade
         readability['flesch_reading_grade_consensus'] = self.readability.flesch_reading_grade_consensus
@@ -129,6 +131,7 @@ class Score:
         writing['top_10_phrases'] = self.general.topphrases
         writing['phrases_wordcloud'] = self.general.topphraseswordcloud
         writing['keywords'] = self.general.keywords
+        writing['top_10_lemmatized'] = self.general.top10lemmatized
 
         metrics['general'] = general
         metrics['readability'] = readability

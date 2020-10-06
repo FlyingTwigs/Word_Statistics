@@ -21,7 +21,7 @@ flesch_ease_grading_system = {
                         range(90, 101): 'very easy to read'
                         }
 
-""" us_grade_level_system_age = {
+us_grade_level_system_age = {
                         range(3, 5): 'pre-kindergarten',
                         range(5, 6): 'kindergarten',
                         range(6, 7): '1st grade',
@@ -85,7 +85,7 @@ def readability_test_consensus(score, grading_system):
                 result_index = 4
             elif result_index > 9:
                 result_index = 9
-        return result[result_index] """
+        return result[result_index]
 
 class Readability:
     def __init__(self):
@@ -102,13 +102,13 @@ class Readability:
         
     def generate_score(self, text):
         self.flesch_reading_grade = ts.flesch_reading_ease(text)
-        """ self.flesch_reading_grade_consensus = readability_test_consensus(self.flesch_reading_grade, flesch_ease_grading_system) """
+        self.flesch_reading_grade_consensus = readability_test_consensus(self.flesch_reading_grade, flesch_ease_grading_system)
         self.flesch_kincaid_grade = ts.flesch_kincaid_grade(text)
-        """ self.flesch_kincaid_grade_consensus = readability_test_consensus(self.flesch_kincaid_grade, us_grade_level_system_age) """
+        self.flesch_kincaid_grade_consensus = readability_test_consensus(self.flesch_kincaid_grade, us_grade_level_system_age)
         self.dale_chall_grade = ts.dale_chall_readability_score(text)
-        """  self.dale_chall_grade_consensus = readability_test_consensus(self.dale_chall_grade, dale_chall_system) """
+        self.dale_chall_grade_consensus = readability_test_consensus(self.dale_chall_grade, dale_chall_system)
         self.smog_grade = ts.smog_index(text)
-        """ self.ari_grade_consensus = readability_test_consensus(self.ari_grade, us_grade_level_system) """
         self.ari_grade = ts.automated_readability_index(text)
+        """  self.ari_grade_consensus = readability_test_consensus(self.ari_grade, us_grade_level_system_level) """
         self.coleman_liau_grade = ts.coleman_liau_index(text)
         pass
