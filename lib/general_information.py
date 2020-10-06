@@ -46,7 +46,11 @@ class GeneralInformation:
         pass
 
     def languagedetect(self, text):
-        self.language = TextBlob(str(text)).detect_language()
+        try:
+            self.language = TextBlob(str(text)).detect_language()
+        except Exception as e:
+            self.language = "---"
+            pass
         pass
 
     def sentence(self, text):

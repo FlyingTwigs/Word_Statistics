@@ -61,6 +61,7 @@ if __name__ == "__main__":
 
     # Section: Contextual-combine
     stats["contextual"]["unify"] = postcontext(stats["contextual"])
+    stats["general"]["paragraph_length"] = len(stats["contextual"]["pos"])
 
     # Total computed time consumed
     stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))

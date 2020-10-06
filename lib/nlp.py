@@ -125,7 +125,13 @@ def runpos(text1):
 
 def eachsentiment(text1):
     lang = "eng"
-    language = TextBlob(str(text1)).detect_language()
+    language = ""
+    try:
+        language = TextBlob(str(text)).detect_language()
+    except Exception as e:
+        language = "en"
+        pass
+
     if language != "en":
         lang = "chi"
 
@@ -251,12 +257,12 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
                     the_idx_in_para = gec_match_pos[corr["eostart"]]
                     paragraph_pos = paragraph_pos[:the_idx_in_para] + [{
                         'text': '',
-                        'tag': '',
+                        'tag': corr["etype"],
                         'dep': '',
                         'type': 'INSERT',
                         'start': the_idx_in_para,
                         'end': the_idx_in_para,
-                        'new_text': [{'text': corr['ecstr'] + ' '}]
+                        'new_text': [{'text': corr['ecstr'] + ' ', 'etype': corr["etype"]}]
                     }, {
                         'text': ' ', 'tag': 'ESC'
                     }] + paragraph_pos[the_idx_in_para:]
@@ -267,9 +273,11 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
 
                     paragraph_pos[the_idx_in_para]["start"] = the_idx_in_para
                     paragraph_pos[the_idx_in_para]["end"] = the_idx_in_para + len_of_replacement
-                    paragraph_pos[the_idx_in_para]["new_text"] = [{'text': corr['ecstr']}]
+                    paragraph_pos[the_idx_in_para]["tag"] = corr["etype"]
+                    paragraph_pos[the_idx_in_para]["new_text"] = [{'text': corr['ecstr'], 'etype': corr["etype"]}]
                     for rep in range( paragraph_pos[the_idx_in_para]["start"] + 1, paragraph_pos[the_idx_in_para]["end"] - 2):
                         paragraph_pos[rep]["new_text"] = []
+                        paragraph_pos[rep]["tag"] = corr["etype"]
             else:
                 try:
                     print(gec_match_pos[corr["eostart"]])
@@ -279,12 +287,12 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
                         'text': ' ', 'tag': 'ESC'
                     }, {
                         'text': '',
-                        'tag': '',
+                        'tag': corr["etype"],
                         'dep': '',
                         'type': 'APPEND',
                         'start': prev_index + len(sentence_pos),
                         'end': prev_index + len(sentence_pos),
-                        'new_text': [{'text': ' ' + corr['ecstr']}]
+                        'new_text': [{'text': ' ' + corr['ecstr'], 'etype': corr["etype"]}]
                     }] + paragraph_pos[prev_index + len(sentence_pos):]
                     pass
                 pass
@@ -308,7 +316,7 @@ def postcontext(in_obj):
         sentiment_result = locate_sublist2(Gpara_idx, in_put.split(" "), [x["raw"] for x in GSEN[Gpara_idx]], source_sep=" ")
         gec_result = locate_sublist2(Gpara_idx, in_put.split(" "), [x["original"] for x in GGEC[Gpara_idx]], source_sep=" ")
 
-        gender_combine = combine_feature(Gpara_idx, gender_result, [{'word': x["text"], 'new_text': [{"text": "/ " + y} for y in x["alt"]]} for x in GGEN[Gpara_idx]["suggestion"]])
+        gender_combine = combine_feature(Gpara_idx, gender_result, [{'word': x["text"], 'tag': x["tag"], 'new_text': [{"text": "" + y} for y in x["alt"]]} for x in GGEN[Gpara_idx]["suggestion"]])
         sentiment_combine = combine_feature(Gpara_idx, sentiment_result, GSEN[Gpara_idx])
         gec_combine = combine_feature(Gpara_idx, gec_result, GGEC[Gpara_idx])
 
@@ -318,7 +326,7 @@ def postcontext(in_obj):
         gec_all.append([x for x in gec_atomize(Gpara_idx, GPOS, gec_combine) if "new_text" in x.keys()])
 
     return {
-        "pos": [{"oidx": idx, **x} for x in GPOS],
+        "pos": [[{"oidx": idx, **x} for idx, x in enumerate(para)] for para in GPOS],
         "gendercode": gender_all,
         "sentiment": sentiment_all,
         "gec": gec_all
