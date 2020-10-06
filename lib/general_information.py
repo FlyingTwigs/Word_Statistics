@@ -28,6 +28,9 @@ class GeneralInformation:
         self.keywords = None
         self.numberfigure = None
         self.count_numberfigure = None
+        self.maxlenword = None
+        self.maxlenwordcount = None
+        self.top10lemmatized = None
 
     def generate_score(self, text):
         self.languagedetect(text)
@@ -43,6 +46,8 @@ class GeneralInformation:
         self.extract_phrases(text)
         self.extract_keywords(text)
         self.count_number_figure(text)
+        self.findmaxlenword(text)
+        self.lemmatize(text)
         pass
 
     def languagedetect(self, text):
@@ -74,6 +79,14 @@ class GeneralInformation:
     
     def unique_words(self, text):
         self.unique_words_length = len(list(set(re.findall('\w+', text.lower()))))
+        pass
+
+    def findmaxlenword(self, text):
+        words = text.rsplit()
+        maxlen = len(max(words, key = len))
+
+        self.maxlenword = [word for word in words if len(word) == maxlen]
+        self.maxlenwordcount = maxlen
         pass
 
     def count_number_figure(self, text):
@@ -112,6 +125,11 @@ class GeneralInformation:
         self.partofspeech = part_of_speech
         self.partofspeechpercentage = part_of_speech_percentage
         pass
+
+    def lemmatize(self, text):
+        document = nlp(text)
+        c = Counter([token.lemma_ for token in document if token.lemma_ != "-PRON-" and token.is_punct != True and token.is_space != True and token.is_stop != True])
+        self.top10lemmatized = dict(c.most_common(10))
 
     def named_entity(self, text):
         document = nlp(text)
