@@ -31,6 +31,10 @@ class GeneralInformation:
         self.maxlenword = None
         self.maxlenwordcount = None
         self.top10lemmatized = None
+        self.special_characters_chars = None
+        self.count_specialcharacters_chars = None
+        self.special_characters = None
+        self.count_specialcharacters = None
 
     def generate_score(self, text):
         self.languagedetect(text)
@@ -48,6 +52,7 @@ class GeneralInformation:
         self.count_number_figure(text)
         self.findmaxlenword(text)
         self.lemmatize(text)
+        self.count_special_characters(text)
         pass
 
     def languagedetect(self, text):
@@ -96,6 +101,32 @@ class GeneralInformation:
         self.numberfigure = number_figure
         self.count_numberfigure = len(number_figure)
         pass
+
+
+    # TODO: add switch for either character only or the combined. Utilize parameter.
+    def count_special_characters(self, text):
+        char_only = word_tokenize(text)
+        words = text.split()
+        special_characters_char_only = []
+        special_character_combined = []
+        
+        for word in char_only:
+            match = re.search(
+                r'[@_!#$%^&*()<>?/\|}{~:;,.|]+', word)
+            if match:
+                special_characters_char_only.append(match.group())
+
+        for word in words:
+            match = re.search(
+                r'^\$?[A-Za-z]?[@_!#$%^&*()<>?/\|}{~:;,.|]+[A-Za-z]?', word)
+            if match:
+                special_character_combined.append(match.group())
+        
+        self.special_characters_chars = special_characters_char_only
+        self.count_specialcharacters_chars = len(special_characters_char_only)
+        self.special_characters = special_character_combined
+        self.count_specialcharacters = len(special_character_combined)
+
 
     def characters(self, text):
         characters_available = [list(line.rstrip()) for line in text]

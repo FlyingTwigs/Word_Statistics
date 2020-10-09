@@ -99,6 +99,10 @@ class Score:
         general['count_numberfigure'] = self.general.count_numberfigure
         general['maxlenword'] = self.general.maxlenword
         general['maxlenwordcount'] = self.general.maxlenwordcount
+        general['special_characters'] = self.general.special_characters
+        general['count_specialcharacters'] = self.general.count_specialcharacters
+        general['special_characters_only'] = self.general.special_characters_chars
+        general['count_specialcharactersonly'] = self.general.count_specialcharacters_chars
 
         readability['flesch_reading_ease'] = self.readability.flesch_reading_grade
         readability['flesch_reading_grade_consensus'] = self.readability.flesch_reading_grade_consensus
