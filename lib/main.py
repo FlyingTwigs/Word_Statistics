@@ -54,14 +54,20 @@ if __name__ == "__main__":
 
     # Section: Contextual
     stats["contextual"] = {}
-    stats["contextual"]["gendercode"] = rungendercode(body)
-    stats["contextual"]["gec"] = rungec(body)
-    stats["contextual"]["pos"] = runpos(body)
-    stats["contextual"]["sentiment"] = runsentiment(body)
+    # stats["contextual"]["gendercode"] = rungendercode(body)
+    # stats["contextual"]["gec"] = rungec(body)
+    # stats["contextual"]["pos"] = runpos(body)
+    # stats["contextual"]["sentiment"] = runsentiment(body)
+    pos = runpos(body)
 
     # Section: Contextual-combine
-    stats["contextual"]["unify"] = postcontext(stats["contextual"])
-    stats["general"]["paragraph_length"] = len(stats["contextual"]["pos"])
+    stats["contextual"]["unify"] = postcontext({
+        "gendercode": rungendercode(body),
+        "gec": rungec(body),
+        "pos": pos,
+        "sentiment": runsentiment(body),
+    })
+    stats["general"]["paragraph_length"] = len(pos)
 
     # Total computed time consumed
     stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))

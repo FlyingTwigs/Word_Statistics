@@ -1,6 +1,7 @@
 import os
 import re
 from textblob import TextBlob
+from nltk.tokenize import sent_tokenize
 from vglib.vglib2 import Vglib
 from spacy.lang.en import English
 
@@ -26,6 +27,45 @@ vg.submodule_add('Spacywrap', 'Spacywrap')
 vg.function_add('sentiment', 'Sentiment', path=os.path.dirname((os.path.dirname(os.path.realpath(__file__)))) + "/vgnlp/plugins/sentiment/main.py")
 vg.function_add('gender', 'GenderIdentify')
 
+def split_into_paragraph(text, size=10):
+    paragraphs = []
+    sum_len = 0
+    avg_len = 0
+    split_paras = text.split("\n")
+
+    # Calculate average length of word in one line
+    for item in split_paras:
+        words = item.split()
+        sum_len = sum_len + len(words)
+    
+    avg_len = sum_len / len(split_paras)
+    if 50 > avg_len:
+        join_split_paras = " ".join(split_paras)
+        sentences = sent_tokenize(join_split_paras)
+
+        # Check whether consecutive new-line character exists,
+        # if yes, use consecutive new-line characters as break point.
+        if -1 != text.find("\n\n"):
+            print("nn")
+            paragraphs = [" ".join(para.split("\n")) for para in text.split("\n\n")]
+        elif -1 != text.find("\r\n\r\n"):
+            print("rnrn")
+            paragraphs = [" ".join(para.split("\r\n")) for para in text.split("\r\n\r\n")]
+        else:
+            print(f"by sent {len(sentences)}")
+            # use 10 sentence as a group
+            idx = 0
+            
+            while len(sentences) > idx*size:
+                paragraphs.append(" ".join(sentences[idx*size:(idx+1)*size]))
+                idx = idx + 1
+    else:
+        # use new-line character to treat as paragraph
+        paragraphs = split_paras
+
+
+    return paragraphs
+
 def split_like_pos(sentence):
     global nlp
 
@@ -45,7 +85,7 @@ def accumulated_len(source_para, source_sep = " "):
         acc_len.append(len(source_sep.join(source_para[:idx])))
     return acc_len
 
-def locate_sublist2(para_idx, find_para, source_para, source_sep=" "):
+def locate_sublist(para_idx, find_para, source_para, source_sep=" "):
     own_range_result = []
     sepchar = " "
 
@@ -53,16 +93,12 @@ def locate_sublist2(para_idx, find_para, source_para, source_sep=" "):
         item = source_para[:idx+1]
 
         start_tokens = split_like_pos(sepchar.join(item[:-1]))
-
         end_tokens = split_like_pos(sepchar.join(item))
-
-        # result = split_like_pos(sepchar.join(source_para[idx:idx+1]))
 
         own_range_result.append({
             "src_idx": idx,
             "start": len(start_tokens) + (0 if idx == 0 else 1),
             "end": len(end_tokens),
-            # "endtoken": result
         })
 
     return own_range_result
@@ -96,7 +132,7 @@ def eachgec(text1):
     return ret
 
 def rungec(text1):
-    return [[eachgec(str(x).strip()) for x in nlp(paragraph).sents] for paragraph in text1.split("\n") if len(paragraph) >= 3]
+    return [{"suggestion": [eachgec(str(x).strip()) for x in nlp(paragraph).sents]} for paragraph in split_into_paragraph(text1) if len(paragraph) >= 3]
 
 def eachpos(text1):
     nlp_spacy = vg.task_dispatch({
@@ -121,7 +157,7 @@ def eachpos(text1):
     return [x for x in nlp.result["result"]]
 
 def runpos(text1):
-    return [eachpos(paragraph.strip()) for paragraph in text1.split("\n") if len(paragraph) >= 3]
+    return [eachpos(paragraph.strip()) for paragraph in split_into_paragraph(text1) if len(paragraph) >= 3]
 
 def eachsentiment(text1):
     lang = "eng"
@@ -159,7 +195,7 @@ def eachsentiment(text1):
     return ret
 
 def runsentiment(text1):
-    return [eachsentiment(paragraph.strip()) for paragraph in text1.split("\n") if len(paragraph) >= 3]
+    return [{"suggestion": eachsentiment(paragraph.strip())} for paragraph in split_into_paragraph(text1) if len(paragraph) >= 3]
 
 def eachgendercode(text1):
     """
@@ -195,7 +231,7 @@ def eachgendercode(text1):
     return ret
 
 def rungendercode(text1):
-    return [eachgendercode(paragraph.strip()) for paragraph in text1.split("\n") if len(paragraph) >= 3]
+    return [eachgendercode(paragraph.strip()) for paragraph in split_into_paragraph(text1) if len(paragraph) >= 3]
 
 def combine_feature(para_idx, result, join):
     combined = []
@@ -212,7 +248,7 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
     gec_combine: a list of sentences, with range of PoS tag index (ie ["start"] and ["end"])
     """
     # Number of tags of each sentence in a paragraph
-    num_of_tags = [len(split_like_pos(x["original"])) for x in gec_combine]
+    num_of_tags = [len(split_like_pos(x["text"])) for x in gec_combine]
     # paragraph_pos = [dict(x) for x in GPOS[Gpara_idx]]
     paragraph_pos = [{"oidx":idx, **x} for idx, x in enumerate(GPOS[Gpara_idx])]
     all_gec_match_pos = []
@@ -222,7 +258,7 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
         # stage 1: fit gec back to sentence PoS list, get "gec_match_pos"(paragraph PoS list)
         sentence_pos = [dict(x) for x in GPOS[Gpara_idx][asentence["start"]:asentence["end"]]]
         tmpsent = ""
-        thegec = asentence["original"].split(" ") # broke a sentence in "errant"-style
+        thegec = asentence["text"].split(" ") # broke a sentence in "errant"-style
         gec_match_pos = []
         gec_idx = 0
         subset = list()
@@ -247,7 +283,7 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
         sentence_pos = [dict(x) for x in GPOS[Gpara_idx][asentence["start"]:asentence["end"]]]
         tidx = len(gec_combine) - sidx - 1
         gec_match_pos = all_gec_match_pos[tidx]
-        thegec = asentence["original"].split(" ") # broke a sentence in "errant"-style
+        thegec = asentence["text"].split(" ") # broke a sentence in "errant"-style
         prev_index = sum(num_of_tags[:tidx]) + len(" ") * tidx # previous sentence
 
         for corr in reversed(asentence["errant"]):
@@ -312,17 +348,20 @@ def postcontext(in_obj):
 
     for Gpara_idx in range(0, len(GPOS)):
         in_put = source_sep.join([x["text"] for x in GPOS[Gpara_idx]])
-        gender_result = locate_sublist2(Gpara_idx, in_put.split(" "), [x["text"] for x in GGEN[Gpara_idx]["suggestion"]], source_sep=" ")
-        sentiment_result = locate_sublist2(Gpara_idx, in_put.split(" "), [x["raw"] for x in GSEN[Gpara_idx]], source_sep=" ")
-        gec_result = locate_sublist2(Gpara_idx, in_put.split(" "), [x["original"] for x in GGEC[Gpara_idx]], source_sep=" ")
 
-        gender_combine = combine_feature(Gpara_idx, gender_result, [{'word': x["text"], 'tag': x["tag"], 'new_text': [{"text": "" + y} for y in x["alt"]]} for x in GGEN[Gpara_idx]["suggestion"]])
-        sentiment_combine = combine_feature(Gpara_idx, sentiment_result, GSEN[Gpara_idx])
-        gec_combine = combine_feature(Gpara_idx, gec_result, GGEC[Gpara_idx])
-
-        # Consolidate
+        # To tokenize in PoS style, to align the two lists
+        gender_result = locate_sublist(Gpara_idx, in_put.split(" "), [x["text"] for x in GGEN[Gpara_idx]["suggestion"]], source_sep=" ")
+        gender_combine = combine_feature(Gpara_idx, gender_result, GGEN[Gpara_idx]["suggestion"])
         gender_all.append([x for x in gender_combine if len(x["new_text"]) > 0])
+
+        # To tokenize in PoS style, to align the two lists
+        sentiment_result = locate_sublist(Gpara_idx, in_put.split(" "), [x["text"] for x in GSEN[Gpara_idx]["suggestion"]], source_sep=" ")
+        sentiment_combine = combine_feature(Gpara_idx, sentiment_result, GSEN[Gpara_idx]["suggestion"])
         sentiment_all.append(sentiment_combine)
+
+        # To tokenize in PoS style, to align the two lists
+        gec_result = locate_sublist(Gpara_idx, in_put.split(" "), [x["text"] for x in GGEC[Gpara_idx]["suggestion"]], source_sep=" ")
+        gec_combine = combine_feature(Gpara_idx, gec_result, GGEC[Gpara_idx]["suggestion"])
         gec_all.append([x for x in gec_atomize(Gpara_idx, GPOS, gec_combine) if "new_text" in x.keys()])
 
     return {
