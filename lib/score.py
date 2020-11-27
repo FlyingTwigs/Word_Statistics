@@ -59,6 +59,7 @@ class Score:
         scaled = ((score - 129)/(667 - 129)) * 100
         return scaled
 
+    # TODO: Need to change if the score is 0, then this is not assessed. (for every scaling)
     def scale_meaningfulnessc(self, score):
         scaled = ((score - 127)/(617 - 127)) * 100
         return scaled

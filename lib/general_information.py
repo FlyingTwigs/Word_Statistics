@@ -8,7 +8,7 @@ from collections import  Counter
 # python -m spacy download en_core_web_sm
 # 
 
-nlp = spacy.load("en_core_web_sm")
+nlp = spacy.load("en_core_web_md")
 
 class GeneralInformation:
     def __init__(self):
@@ -122,7 +122,7 @@ class GeneralInformation:
             if match:
                 special_character_combined.append(match.group())
         
-        self.special_characters_chars = special_characters_char_only
+        self.special_characters_chars = Counter(special_characters_char_only)
         self.count_specialcharacters_chars = len(special_characters_char_only)
         self.special_characters = special_character_combined
         self.count_specialcharacters = len(special_character_combined)
@@ -131,7 +131,10 @@ class GeneralInformation:
     def characters(self, text):
         characters_available = [list(line.rstrip()) for line in text]
         characters_with_space = len(re.findall(' ', text))
-        self.characters_length = len(characters_available) - characters_with_space
+        if len(characters_available) - characters_with_space > 1000000:
+            raise ValueError("The number of characters is above 1000000.")
+        else:
+            self.characters_length = len(characters_available) - characters_with_space
         pass
     
     def lexdiv(self, text):
@@ -156,7 +159,7 @@ class GeneralInformation:
     def lemmatize(self, text):
         document = nlp(text)
         c = Counter([token.lemma_ for token in document if token.lemma_ != "-PRON-" and token.is_punct != True and token.is_space != True and token.is_stop != True])
-        self.top10lemmatized = dict(c.most_common(10))
+        self.top10lemmatized = dict(c.most_common(50))
 
     def named_entity(self, text):
         document = nlp(text)
@@ -168,8 +171,8 @@ class GeneralInformation:
     def extract_phrases(self, text):
         document = nlp(text)
         token_words = Counter([token.text for token in document if token.is_stop != True and token.is_punct != True and token.is_space != True])
-        self.topphrases = dict(token_words.most_common(10))
-        self.topphraseswordcloud = dict(token_words.most_common(30))
+        self.topphrases = dict(token_words.most_common(50))
+        """ self.topphraseswordcloud = dict(token_words.most_common(30)) """
         pass
 
     def extract_keywords(self, text):
