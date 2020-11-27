@@ -40,36 +40,60 @@ class Score:
         self.general = GeneralInformation()
 
     def scale_freq(self, score):
-        scaled = (1 - ((score-1)/5776384)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = (1 - ((score-1)/5776384)) * 100
         return scaled
 
     def scale_familiarity(self, score):
-        scaled = ((score - 101)/(657-101)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = ((score - 101)/(657-101)) * 100
         return scaled
 
     def scale_wordrange(self,score):
-        scaled = (1-((score - 1)/(3209 - 1))) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = (1-((score - 1)/(3209 - 1))) * 100
         return scaled
 
     def scale_concreteness(self, score):
-        scaled = ((score - 158)/(670 - 158)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = ((score - 158)/(670 - 158)) * 100
         return scaled 
     
     def scale_imageability(self, score):
-        scaled = ((score - 129)/(667 - 129)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = ((score - 129)/(667 - 129)) * 100
         return scaled
 
     # TODO: Need to change if the score is 0, then this is not assessed. (for every scaling)
     def scale_meaningfulnessc(self, score):
-        scaled = ((score - 127)/(617 - 127)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = ((score - 127)/(617 - 127)) * 100
         return scaled
 
     def scale_meaningfulnessp(self, score):
-        scaled = ((score - 192)/(922 - 192)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = ((score - 192)/(922 - 192)) * 100
         return scaled
 
     def scale_ageofacquisition(self, score):
-        scaled = (1 - (score - 125)/(697 - 125)) * 100
+        if (score == 0):
+            scaled = 0
+        else:
+            scaled = (1 - (score - 125)/(697 - 125)) * 100
         return scaled
 
     def evaluation(self, text):
