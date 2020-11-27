@@ -61,13 +61,20 @@ if __name__ == "__main__":
     pos = runpos(body)
 
     # Section: Contextual-combine
+    result_gec = rungec(body)
     stats["contextual"]["unify"] = postcontext({
         "gendercode": rungendercode(body),
-        "gec": rungec(body),
+        "gec": result_gec,
         "pos": pos,
         "sentiment": runsentiment(body),
     })
     stats["general"]["paragraph_length"] = len(pos)
+
+    # GEC count
+    gec_para_count = [len(x) for x in stats["contextual"]["unify"]["gec"]]
+    gec_count = sum(gec_para_count)
+    stats["general"]["gec_para_count"] = gec_para_count
+    stats["general"]["avg_gec"] = gec_count / stats["general"]["sentence_length"]
 
     # Total computed time consumed
     stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))

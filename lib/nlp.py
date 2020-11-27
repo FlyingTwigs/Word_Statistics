@@ -269,12 +269,20 @@ def gec_atomize(Gpara_idx, GPOS, gec_combine):
                 continue
             tmpsent = tmpsent + sentence_pos[idx]["text"]
             subset.append(prev_index + idx)
-
-            if thegec[gec_idx] == tmpsent:
-                gec_match_pos.append(min(subset))
-                subset = list()
-                tmpsent = ""
-                gec_idx = gec_idx + 1
+            try:
+                if thegec[gec_idx] == tmpsent:
+                    gec_match_pos.append(min(subset))
+                    subset = list()
+                    tmpsent = ""
+                    gec_idx = gec_idx + 1
+            except Exception as e:
+                ## Due to PDF-to-text is not one line one paragraph,
+                ## No space character after period
+                ## PoS max index > GEC sentence index
+                print(f"[Error] Gec: {e}")
+                print(thegec)
+                print(gec_idx)
+                pass
 
         all_gec_match_pos.append(gec_match_pos)
 
