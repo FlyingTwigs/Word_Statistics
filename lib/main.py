@@ -1,9 +1,21 @@
 from score import Score, create_parser
 from nlp import rungec, runpos, runsentiment, rungendercode, postcontext
+from random import randint
+
 import os
+import logging
+import logging.config
 import json
 import time
 import datetime
+
+## make an RNG for submission ID and Document ID
+def random_number_generator(n):
+    range_start = 10 ** (n-1)
+    range_end = 10 ** (n) - 1
+    return randint(range_start, range_end)
+
+    ## Deal with the file location
 
 def associative_rules(processed_body):
     feedback_text = ""
@@ -33,51 +45,77 @@ def read_file(filename):
 if __name__ == "__main__":
     parser = create_parser()
 
+    # add exception on character length
+    submissionID = random_number_generator(8)
     args = parser.parse_args()
 
+    logger = logging.getLogger(__name__)
+    
     body = read_file(args.file)
+    file_name = os.path.basename(args.file)
+    file_path = os.path.dirname(args.file)
 
-    score = Score()
-    result = body
+    logging.basicConfig(filename='app.log', filemode='w', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%d-%b-%y %H:%M:%S')
+
+    stats = dict()
+    stats["file_name"] = os.path.splitext(file_name)[0]
+    stats["file_path"] = file_path
+    stats["submissionID"] = submissionID
 
     process_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     start_time = time.time()
     
-    stats = score.evaluation(body)
-    feedback_text = associative_rules(stats)
-    stats["feedback_text"] = feedback_text
-    stats["file_time_proceessed"] = process_time
+    logging.warning(f'File {file_name} is currently processed at {process_time}')
 
-    file_name = os.path.basename(args.file)
+    try:
+        score = Score()
+        result = body
+        data = score.evaluation(body)
+        feedback_text = associative_rules(data)
+        stats["feedback_text"] = feedback_text
+        stats["data"] = data
 
-    stats["file_name"] = os.path.splitext(file_name)[0]
 
-    # Section: Contextual
-    stats["contextual"] = {}
-    # stats["contextual"]["gendercode"] = rungendercode(body)
-    # stats["contextual"]["gec"] = rungec(body)
-    # stats["contextual"]["pos"] = runpos(body)
-    # stats["contextual"]["sentiment"] = runsentiment(body)
-    pos = runpos(body)
+        """
+        vgnlp Code
+        """
+        # Section: Contextual
+        stats["data"]["contextual"] = {}
+        # stats["contextual"]["gendercode"] = rungendercode(body)
+        # stats["contextual"]["gec"] = rungec(body)
+        # stats["contextual"]["pos"] = runpos(body)
+        # stats["contextual"]["sentiment"] = runsentiment(body)
+        pos = runpos(body)
 
-    # Section: Contextual-combine
-    result_gec = rungec(body)
-    stats["contextual"]["unify"] = postcontext({
-        "gendercode": rungendercode(body),
-        "gec": result_gec,
-        "pos": pos,
-        "sentiment": runsentiment(body),
-    })
-    stats["general"]["paragraph_length"] = len(pos)
+        # Section: Contextual-combine
+        result_gec = rungec(body)
+        stats["data"]["contextual"]["unify"] = postcontext({
+            "gendercode": rungendercode(body),
+            "gec": result_gec,
+            "pos": pos,
+            "sentiment": runsentiment(body),
+        })
+        stats["data"]["general"]["paragraph_length"] = len(pos)
 
-    # GEC count
-    gec_para_count = [len(x) for x in stats["contextual"]["unify"]["gec"]]
-    gec_count = sum(gec_para_count)
-    stats["general"]["gec_para_count"] = gec_para_count
-    stats["general"]["avg_gec"] = gec_count / stats["general"]["sentence_length"]
+        # GEC count
+        gec_para_count = [len(x) for x in stats["data"]["contextual"]["unify"]["gec"]]
+        gec_count = sum(gec_para_count)
+        stats["data"]["general"]["gec_para_count"] = gec_para_count
+        stats["data"]["general"]["avg_gec"] = gec_count / stats["data"]["general"]["sentence_length"]
+        """
+        vgnlp Code end
+        """
 
-    # Total computed time consumed
-    stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
+
+        logging.warning(f'Data of {file_name} successfully compiled')
+    except ValueError: 
+        stats["STATUS"] = "Failed"
+        logging.error(f'Filename {file_name} raised an Value Error', exc_info=True)
+    else:
+        stats["STATUS"] = "SUCCESS"
+    finally:
+        stats["file_time_proceessed"] = process_time
+        stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
 
     basepath = os.path.dirname(os.path.realpath(__file__))
     # print(basepath)
@@ -114,3 +152,5 @@ if __name__ == "__main__":
     with open(writepath, 'w') as f:
         json.dump(stats, f, indent=4)
         print('Statistics Generated. Please check the output on output_files folder')
+
+    # add logger system
