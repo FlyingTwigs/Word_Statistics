@@ -8,7 +8,7 @@ from collections import  Counter
 # python -m spacy download en_core_web_sm
 # 
 
-nlp = spacy.load("en_core_web_md")
+nlp = spacy.load("en_core_web_sm")
 
 class GeneralInformation:
     def __init__(self):
