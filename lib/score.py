@@ -158,7 +158,7 @@ class Score:
 
         writing['top_8_named_entity'] = self.general.namedentity
         writing['top_10_phrases'] = self.general.topphrases
-        writing['phrases_wordcloud'] = self.general.topphraseswordcloud
+        # writing['phrases_wordcloud'] = self.general.topphraseswordcloud
         writing['keywords'] = self.general.keywords
         writing['top_10_lemmatized'] = self.general.top10lemmatized
 

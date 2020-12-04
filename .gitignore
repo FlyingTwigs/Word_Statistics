@@ -18,3 +18,6 @@ output_files/
 
 # Files
 pdf_concept_category/
+
+# Logger file
+*.log
