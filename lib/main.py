@@ -55,7 +55,7 @@ if __name__ == "__main__":
     file_name = os.path.basename(args.file)
     file_path = os.path.dirname(args.file)
 
-    logging.basicConfig(filename='app.log', filemode='w', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%d-%b-%y %H:%M:%S')
+    logging.basicConfig(filename='app.log', filemode='a', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%d-%b-%y %H:%M:%S')
 
     stats = dict()
     stats["file_name"] = os.path.splitext(file_name)[0]
@@ -72,8 +72,9 @@ if __name__ == "__main__":
         result = body
         data = score.evaluation(body)
         feedback_text = associative_rules(data)
-        stats["feedback_text"] = feedback_text
         stats["data"] = data
+        stats["data"]["feedback_text"] = feedback_text
+
 
 
         """

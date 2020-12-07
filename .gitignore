@@ -19,3 +19,6 @@ output_files/
 # Files
 pdf_concept_category/
 vgnlp/
+
+# Logger file
+*.log
