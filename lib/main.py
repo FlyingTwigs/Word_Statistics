@@ -55,7 +55,7 @@ if __name__ == "__main__":
     file_name = os.path.basename(args.file)
     file_path = os.path.dirname(args.file)
 
-    logging.basicConfig(filename='app.log', filemode='a', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%d-%b-%y %H:%M:%S')
+    logging.basicConfig(filename='app.log', filemode='a', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%Y-%m-%d %H:%M:%S %z')
 
     stats = dict()
     stats["file_name"] = os.path.splitext(file_name)[0]

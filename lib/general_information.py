@@ -19,6 +19,7 @@ class GeneralInformation:
         self.avgword = None
         self.unique_words_length = None
         self.characters_length = None
+        self.characters_with_space = None
         self.lexical_diversity = None
         self.partofspeech = None
         self.partofspeechpercentage = None
@@ -83,7 +84,7 @@ class GeneralInformation:
         pass
     
     def unique_words(self, text):
-        self.unique_words_length = len(list(set(re.findall('\w+', text.lower()))))
+        self.unique_words_length = len(list(set(re.findall('[^\s]+', text.lower()))))
         pass
 
     def findmaxlenword(self, text):
@@ -139,6 +140,7 @@ class GeneralInformation:
             raise ValueError("The number of characters is above 1000000.")
         else:
             self.characters_length = len(characters_available) - characters_with_space
+            self.characters_with_space = characters_with_space
         pass
     
     def lexdiv(self, text):

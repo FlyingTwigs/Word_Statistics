@@ -117,6 +117,7 @@ class Score:
         general['average_word_length'] = self.general.avgword
         general['unique_words_length'] = self.general.unique_words_length
         general['characters_length'] = self.general.characters_length
+        general['characters_with_space'] = self.general.characters_with_space
         general['lexical_diversity'] = self.general.lexical_diversity
         general['part_of_speech'] = self.general.partofspeech
         general['part_of_speech_percentage'] = self.general.partofspeechpercentage

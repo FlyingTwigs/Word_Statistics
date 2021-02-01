@@ -46,13 +46,13 @@ def split_into_paragraph(text, size=10):
         # Check whether consecutive new-line character exists,
         # if yes, use consecutive new-line characters as break point.
         if -1 != text.find("\n\n"):
-            print("nn")
+            # print("nn")
             paragraphs = [" ".join(para.split("\n")) for para in text.split("\n\n")]
         elif -1 != text.find("\r\n\r\n"):
-            print("rnrn")
+            # print("rnrn")
             paragraphs = [" ".join(para.split("\r\n")) for para in text.split("\r\n\r\n")]
         else:
-            print(f"by sent {len(sentences)}")
+            # print(f"by sent {len(sentences)}")
             # use 10 sentence as a group
             idx = 0
             
