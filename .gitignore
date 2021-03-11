@@ -19,6 +19,7 @@ output_files/
 # Files
 pdf_concept_category/
 vgnlp/
+keyphrase_generation_rl/
 
 # Logger file
 *.log

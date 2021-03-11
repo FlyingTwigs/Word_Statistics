@@ -1,5 +1,6 @@
 from score import Score, create_parser
 from nlp import rungec, runpos, runsentiment, rungendercode, postcontext
+from keyphrase import runkeyphrase
 from random import randint
 
 import os
@@ -105,6 +106,19 @@ if __name__ == "__main__":
         stats["data"]["general"]["avg_gec"] = gec_count / stats["data"]["general"]["sentence_length"]
         """
         vgnlp Code end
+        """
+
+
+
+        """
+        keyphrase Code
+        """
+        stats["data"]["keyphrase"] = {}
+        kp = runkeyphrase(body, submissionID)
+        kp = kp.replace("\n", " ").replace("  ", " ").replace("  ", " ")
+        stats["data"]["keyphrase"] = list(set(kp.split(";")))
+        """
+        keyphrase Code end
         """
 
 
