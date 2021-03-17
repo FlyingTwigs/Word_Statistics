@@ -31,7 +31,7 @@ def associative_rules(processed_body):
 
     if processed_body["lexical"]["familiarityscore"] > 70:
         feedback_text += "The word choice of the essay excels in familiarity, suggesting that the essay excels in expression. "
-    elif processed_body["familiarityscore"] > 30 and processed_body["familiarityscore"] <= 70:
+    elif processed_body["lexical"]["familiarityscore"] > 30 and processed_body["lexical"]["familiarityscore"] <= 70:
         feedback_text += "The word choice of the essay might be a bit esoteric in terms of familiarity, suggesting that the word choice could be more grounded. "
     else:
         feedback_text += "The word choice of the essay is arcane, suggesting that the essay needs to be modified to make it more suitable for academic writing. "
