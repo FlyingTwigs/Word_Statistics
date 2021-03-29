@@ -61,7 +61,7 @@ if __name__ == "__main__":
     stats = dict()
     stats["file_name"] = os.path.splitext(file_name)[0]
     stats["file_path"] = file_path
-    stats["submissionID"] = submissionID
+    stats["submissionID"] = args.submissionid
 
     process_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     start_time = time.time()

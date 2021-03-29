@@ -51,6 +51,7 @@ git clone https://github.com/kenchan0226/keyphrase-generation-rl.git keyphrase_g
 edit `keyphrase_generation_rl/interactive_predict.py`, replace the import statement as the following:
 
 ```
+import os
 import sys
 from os import path
 
@@ -64,6 +65,9 @@ import argparse
 from preprocess import *
 from keyphrase_generation_rl.preprocess import read_tokenized_src_file
 from utils.data_loader import load_vocab
+from pykp.io import build_interactive_predict_dataset, KeyphraseDataset
+from torch.utils.data import DataLoader
+import predict
 ```
 
 edit `keyphrase_generation_rl/preprocess.py`, comment this function:
@@ -73,6 +77,15 @@ edit `keyphrase_generation_rl/preprocess.py`, comment this function:
 #   ....
 #   ....
 ```
+
+For no-GPU machine, please edit `keyphrase_generation_rl/predict.py`, add map_location='cpu' into torch.load()
+
+```
+def init_pretrained_model(opt):
+    model = Seq2SeqModel(opt)
+    model.load_state_dict(torch.load(opt.model, map_location='cpu'))
+```
+
 
 **Datasets**
 

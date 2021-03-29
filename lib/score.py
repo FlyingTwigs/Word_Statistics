@@ -26,6 +26,7 @@ def create_parser():
                                  Example: python lib/main.py -g pdf_concept_category/001.txt
                                     '''))
     parser.add_argument("file", type=str, help="Input file in form of txt files")
+    parser.add_argument("-s", "--submissionid", type=str, help="Submission ID")
     group = parser.add_mutually_exclusive_group()
     group.add_argument("-g", "--general", help="Output general statistics", action='store_true')
     group.add_argument("-r", "--readability", help="Output readability statistics", action='store_true')
