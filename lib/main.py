@@ -126,6 +126,8 @@ if __name__ == "__main__":
     except ValueError: 
         stats["STATUS"] = "Failed"
         logging.error(f'Filename {file_name} raised an Value Error', exc_info=True)
+    except Exception as e:
+        logging.error(f'Filename {file_name} raised an Exception, {e}', exc_info=True)
     else:
         stats["STATUS"] = "SUCCESS"
     finally:
