@@ -8,7 +8,16 @@ import logging
 import logging.config
 import json
 import time
-import datetime
+import unicodedata
+from datetime import datetime
+
+curr_month = datetime.today().strftime('%Y-%m')
+logpath = f"./logs/{curr_month}"
+now_start = datetime.now()
+curr_time = now_start.strftime('%Y%m%d%H%M%S')
+
+if not os.path.exists(logpath):
+    os.mkdir(logpath)
 
 ## make an RNG for submission ID and Document ID
 def random_number_generator(n):
@@ -43,34 +52,22 @@ def read_file(filename):
         text = f.read()
         return text
 
-if __name__ == "__main__":
-    parser = create_parser()
 
-    # add exception on character length
-    submissionID = random_number_generator(8)
-    args = parser.parse_args()
-
-    logger = logging.getLogger(__name__)
-    
-    body = read_file(args.file)
-    file_name = os.path.basename(args.file)
-    file_path = os.path.dirname(args.file)
-
-    logging.basicConfig(filename='app.log', filemode='a', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%Y-%m-%d %H:%M:%S %z')
-
+def gen_stats(filename, file_path, submissionid, body):
     stats = dict()
-    stats["file_name"] = os.path.splitext(file_name)[0]
-    stats["file_path"] = file_path
-    stats["submissionID"] = args.submissionid
 
-    process_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    stats["file_name"] = filename
+    stats["file_path"] = file_path
+    stats["submissionID"] = submissionid
+
+    process_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     start_time = time.time()
     
-    logging.warning(f'File {file_name} is currently processed at {process_time}')
-
     try:
         score = Score()
         result = body
+
+        body = unicodedata.normalize("NFKD", body)
         data = score.evaluation(body)
         feedback_text = associative_rules(data)
         stats["data"] = data
@@ -114,7 +111,7 @@ if __name__ == "__main__":
         keyphrase Code
         """
         stats["data"]["keyphrase"] = {}
-        kp = runkeyphrase(body, submissionID)
+        kp = runkeyphrase(body, args.submissionid)
         kp = kp.replace("\n", " ").replace("  ", " ").replace("  ", " ")
         stats["data"]["keyphrase"] = list(set(kp.split(";")))
         """
@@ -134,8 +131,33 @@ if __name__ == "__main__":
         stats["file_time_proceessed"] = process_time
         stats["time_process"] = float('{:.3f}'.format(time.time() - start_time))
 
+    return stats
+
+
+if __name__ == "__main__":
+    parser = create_parser()
+
+    # add exception on character length
+    # submissionID = random_number_generator(8)
+    args = parser.parse_args()
+
+    logger = logging.getLogger(__name__)
+
+    body = read_file(args.file)
+    file_name = os.path.basename(args.file)
+    file_path = os.path.dirname(args.file)
+    doc_id = args.doc_id
+
+    logging.basicConfig(filename=f'{logpath}/{args.submissionid}_{doc_id}_{os.getpid()}_{curr_time}_statistics.err', filemode='a', format = '%(asctime)s - %(message)s', level = logging.INFO, datefmt='%Y-%m-%d %H:%M:%S %z')
+
+
+    # Main process of generating statistics
+    stats = dict()
+    stats = gen_stats(os.path.splitext(file_name)[0], file_path, args.submissionid, body)
+
+
+    # Preparing output file
     basepath = os.path.dirname(os.path.realpath(__file__))
-    # print(basepath)
     directory = "output_files"
 
     if not os.path.exists(directory):

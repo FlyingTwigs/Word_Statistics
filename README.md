@@ -94,3 +94,13 @@ Visit and follow the instruction mentioned in [this page](https://github.com/ken
 Download pre-trained model, and put it under `keyphrase_generation_rl/model/`
 
 Place training data under `keyphrase_generation_rl/data/`
+
+## Testing
+
+It adopts `unittest` as the testing framework. It is adviced to create a virtual environment to install the dependencies and run the test.
+
+Below is an example command line code to run the test using the python binary within the virtual environment:
+
+```
+/docstat/commandline_dev/nenv/bin/python3 -m unittest test/test_docs.py
+```
