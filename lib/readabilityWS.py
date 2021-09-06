@@ -1,4 +1,5 @@
 import textstat as ts
+from readability import Readability as pyReadability
 
 class RangeDict(dict):
     def __getitem__(self, item):
@@ -101,9 +102,14 @@ class Readability:
         self.coleman_liau_grade = None
         
     def generate_score(self, text):
+        r = pyReadability(text)
         self.flesch_reading_grade = ts.flesch_reading_ease(text)
         self.flesch_reading_grade_consensus = readability_test_consensus(self.flesch_reading_grade, flesch_ease_grading_system)
-        self.flesch_kincaid_grade = ts.flesch_kincaid_grade(text)
+
+        ## Sync with value offered by MS Word
+        # self.flesch_kincaid_grade = ts.flesch_kincaid_grade(text)
+        self.flesch_kincaid_grade = r.flesch_kincaid().score
+
         self.flesch_kincaid_grade_consensus = readability_test_consensus(self.flesch_kincaid_grade, us_grade_level_system_age)
         self.dale_chall_grade = ts.dale_chall_readability_score(text)
         self.dale_chall_grade_consensus = readability_test_consensus(self.dale_chall_grade, dale_chall_system)

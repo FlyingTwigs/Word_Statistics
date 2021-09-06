@@ -2,7 +2,7 @@ import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
 
 from lib.lexicalmetrics import Lexicalmetrics
-from lib.readability import Readability
+from lib.readabilityWS import Readability
 from lib.general_information import GeneralInformation
 import string
 from nltk.tokenize import word_tokenize
